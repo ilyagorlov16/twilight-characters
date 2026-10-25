@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Сумерки · Досье персонажей саги (5 фильмов)</title>
+<style>
+:root{
+  --bg:#07060b; --bg2:#0d0a14; --panel:#141020; --panel2:#1a1528; --panel3:#221b33;
+  --line:#2a2140; --line2:#3a2d58;
+  --txt:#ece7f6; --mut:#a294bd; --dim:#6f6288;
+  --gold:#d8b45e; --vamp:#9a6cf0; --newb:#e05fa8; --nomad:#39b8a8;
+  --wolf:#e07a3f; --hum:#5b9bd8; --hyb:#4ec98a;
+  --shadow:0 10px 28px rgba(0,0,0,.5);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;color:var(--txt);font-size:15px;line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:
+   radial-gradient(1100px 600px at 10% -10%, rgba(154,108,240,.16), transparent 60%),
+   radial-gradient(900px 520px at 95% 0%, rgba(57,184,168,.10), transparent 58%),
+   radial-gradient(1000px 700px at 50% 110%, rgba(224,122,63,.10), transparent 60%),
+   linear-gradient(180deg,var(--bg2),var(--bg) 45%);
+  background-attachment:fixed}
+a{color:var(--gold)}
+.wrap{max-width:1320px;margin:0 auto;padding:0 18px}
+
+/* шапка */
+header{padding:38px 0 20px;border-bottom:1px solid var(--line);position:relative;overflow:hidden}
+.eyebrow{display:inline-flex;gap:8px;align-items:center;font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--gold);border:1px solid var(--line2);background:var(--panel);padding:6px 13px;border-radius:999px;font-weight:700}
+h1{font-size:clamp(26px,4.4vw,46px);margin:16px 0 10px;letter-spacing:-.02em;line-height:1.1}
+h1 .g{background:linear-gradient(100deg,#fff,#d9c6ff 40%,#9fd8ff 70%,#ffd9a0);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{color:var(--mut);max-width:82ch}
+.filmstrip{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.ftag{font-size:12px;font-weight:700;padding:6px 12px;border-radius:9px;background:var(--panel);border:1px solid var(--line);color:var(--mut)}
+.ftag b{color:var(--txt)}
+.stats{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:9px 15px;min-width:92px}
+.stat b{display:block;font-size:21px;line-height:1.15}
+.stat span{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+
+/* панель управления */
+.bar{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);
+  background:linear-gradient(180deg,rgba(7,6,11,.94),rgba(7,6,11,.8));border-bottom:1px solid var(--line);padding:12px 0}
+.bar-in{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.search{position:relative;flex:1;min-width:200px;max-width:360px}
+.search input{width:100%;height:38px;border-radius:10px;border:1px solid var(--line);background:var(--panel);
+  color:var(--txt);padding:0 12px 0 34px;font-size:14px;outline:none}
+.search input:focus{border-color:var(--vamp);box-shadow:0 0 0 3px rgba(154,108,240,.16)}
+.search svg{position:absolute;left:10px;top:11px;width:16px;height:16px;stroke:var(--dim);fill:none;stroke-width:2}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--mut);
+  font-size:12.5px;font-weight:650;cursor:pointer;transition:.15s;white-space:nowrap}
+.chip:hover{color:var(--txt);border-color:var(--line2)}
+.chip.on{background:var(--cc,#cdd6ea);color:#0c0a12;border-color:transparent;font-weight:750}
+select.sel{height:36px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--txt);
+  font-size:13px;padding:0 8px;outline:none;max-width:230px}
+.tgl{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;color:var(--mut);cursor:pointer;user-select:none}
+.tgl input{accent-color:var(--vamp);width:15px;height:15px}
+.count{margin-left:auto;font-size:12.5px;color:var(--dim)}
+.count b{color:var(--txt)}
+
+/* секции */
+section{padding:34px 0;border-top:1px solid var(--line)}
+h2{font-size:clamp(20px,2.6vw,28px);margin:0 0 6px;letter-spacing:-.01em}
+.sdesc{color:var(--mut);margin:0 0 20px;max-width:90ch}
+h3{font-size:16px;margin:24px 0 10px}
+
+/* карточки */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:14px}
+.card{background:linear-gradient(170deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:14px;
+  overflow:hidden;display:flex;flex-direction:column;transition:.18s}
+.card:hover{transform:translateY(-3px);border-color:var(--line2);box-shadow:var(--shadow)}
+.ph{position:relative;aspect-ratio:4/3;background:#0b0813;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.ph img{width:100%;height:100%;object-fit:contain;display:block;transition:transform .35s}
+.card:hover .ph img{transform:scale(1.04)}
+.ph .noimg{position:absolute;inset:0;display:flex;flex-direction:column;gap:8px;align-items:center;justify-content:center;
+  color:var(--dim);background:
+   repeating-linear-gradient(45deg,rgba(255,255,255,.02) 0 10px,transparent 10px 20px),var(--panel3)}
+.ph .noimg svg{width:52px;height:52px;opacity:.5}
+.ph .noimg span{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase}
+.badge{position:absolute;top:8px;left:8px;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+  padding:4px 8px;border-radius:6px;color:#0b0910;background:var(--rc,#888)}
+.films{position:absolute;bottom:8px;left:8px;right:8px;display:flex;gap:3px;flex-wrap:wrap}
+.fchip{font-size:9.5px;font-weight:800;padding:2px 6px;border-radius:5px;background:rgba(7,6,11,.72);
+  color:var(--gold);border:1px solid rgba(216,180,94,.35);backdrop-filter:blur(3px)}
+.cb{padding:13px 14px 14px;display:flex;flex-direction:column;gap:8px;flex:1}
+.cn{margin:0;font-size:15.5px;font-weight:750;line-height:1.3}
+.cen{font-size:11.5px;color:var(--dim);margin-top:2px}
+.cact{font-size:13px;color:var(--gold);font-weight:650}
+.meta{display:grid;grid-template-columns:auto 1fr;gap:3px 10px;font-size:12.6px;margin-top:auto;
+  padding-top:9px;border-top:1px dashed var(--line)}
+.meta dt{color:var(--dim)}
+.meta dd{margin:0;color:var(--mut)}
+.meta dd b{color:var(--txt);font-weight:650}
+.note{grid-column:1/-1;font-size:11.6px;color:var(--dim);font-style:italic}
+.conf{font-size:10px;color:var(--dim);border:1px solid var(--line);border-radius:4px;padding:0 4px;margin-left:5px;font-style:normal}
+
+/* таблица */
+.tscroll{overflow:auto;border:1px solid var(--line);border-radius:14px;background:var(--panel);max-height:70vh}
+table{border-collapse:collapse;width:100%;min-width:1000px;font-size:13px}
+th,td{padding:9px 11px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{position:sticky;top:0;background:var(--panel3);z-index:2;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+tbody tr:hover{background:var(--panel2)}
+td .tph{width:52px;height:52px;object-fit:contain;border-radius:6px;display:block;background:#0b0813}
+td .tph.none{display:flex;align-items:center;justify-content:center;color:var(--dim);font-size:15px}
+.pill{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;
+  padding:2.5px 7px;border-radius:5px;color:#0b0910;background:var(--rc,#888)}
+.fmini{font-size:10.5px;color:var(--gold);letter-spacing:.05em}
+
+/* фактчек */
+.fc{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.fbox{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px}
+.fbox h4{margin:0 0 9px;font-size:14px;color:var(--gold)}
+.fbox ul{margin:0;padding-left:18px;color:var(--mut);font-size:13.2px}
+.fbox li{margin-bottom:6px}
+.fbox li b{color:var(--txt)}
+.ok{color:var(--hyb);font-weight:800}
+.warn{color:var(--newb);font-weight:800}
+
+footer{padding:30px 0 44px;border-top:1px solid var(--line);color:var(--dim);font-size:12.5px;text-align:center}
+
+.empty{padding:44px;text-align:center;color:var(--dim);border:1px dashed var(--line2);border-radius:14px}
+
+@media(max-width:700px){
+  .grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+  .cn{font-size:13.5px}
+  .count{flex-basis:100%;margin-left:0}
+}
+@media print{
+  .bar,.no-print,footer .np{display:none!important}
+  body{background:#fff;color:#000}
+  .card,.fbox,.tscroll{background:#fff!important;border-color:#bbb!important;color:#000}
+  .cn,.cact,.meta dd b,td,th{color:#000!important}
+  .meta dd,td .mut,.fbox li{color:#333!important}
+  .tscroll{max-height:none}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <span class="eyebrow">◈ Досье · киносага «Сумерки» · 2008–2012</span>
+    <h1>Все персонажи пяти фильмов:<br><span class="g">фото, возраст, раса, клан и актёр</span></h1>
+    <p class="lead">Каталог построен по сведённому актёрскому составу саги (Wikipedia: <i>List of The Twilight Saga cast members</i>,
+      сверено с IMDb и Twilight Saga Wiki). Каждый персонаж получил карточку с реальным кадром из фильма,
+      возрастом, годом рождения, расой, кланом и актёром. Изображения лежат рядом, в папке <b>images/</b> — ничего не генерируется.</p>
+    <div class="filmstrip" id="filmstrip"></div>
+    <div class="stats" id="stats"></div>
+  </div>
+</header>
+
+<div class="bar no-print">
+  <div class="wrap bar-in">
+    <div class="search">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="Поиск: персонаж, актёр, клан…" autocomplete="off">
+    </div>
+    <div class="chips" id="raceChips"></div>
+    <select class="sel" id="clanSel"></select>
+    <div class="chips" id="filmChips"></div>
+    <label class="tgl"><input type="checkbox" id="onlyPhoto"> только с фото</label>
+    <div class="count">Показано: <b id="shown">0</b> из <b id="totalAll">0</b></div>
+  </div>
+</div>
+
+<main>
+<section id="cards">
+  <div class="wrap">
+    <h2>Карточки персонажей</h2>
+    <p class="sdesc">Клик по карточке не нужен — всё на виду. Цветная метка — раса, золотые цифры внизу фото — фильмы появления
+      (1 = «Сумерки», 2 = «Новолуние», 3 = «Затмение», 4 = «Рассвет-1», 5 = «Рассвет-2»).
+      Пометка <span class="conf">канон</span> означает точную дату из книг/официального гида; <span class="conf">≈</span> — оценка, т.к. в каноне дата не указана.</p>
+    <div class="grid" id="grid"></div>
+    <div class="empty" id="empty" style="display:none">Никого не нашли. Сбросьте фильтры или измените запрос.</div>
+  </div>
+</section>
+
+<section id="table">
+  <div class="wrap">
+    <h2>Сводная таблица (все персонажи)</h2>
+    <p class="sdesc">Полный список, включая эпизодников без найденных кадров. Удобно распечатать или сверять во время викторины.</p>
+    <div class="tscroll">
+      <table>
+        <thead><tr>
+          <th style="width:56px">Фото</th><th>Персонаж</th><th>Раса</th><th>Клан / группа</th>
+          <th>Возраст</th><th>Год рождения</th><th>Актёр</th><th style="width:70px">Фильмы</th>
+        </tr></thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="factcheck">
+  <div class="wrap">
+    <h2>Фактчекинг актёрского состава</h2>
+    <p class="sdesc">Что сверено и какие особые случаи учтены, чтобы состав был полным по всем пяти фильмам.</p>
+    <div class="fc" id="fc"></div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    Досье собрано по открытым источникам: Wikipedia («List of The Twilight Saga cast members»), IMDb (full credits пяти фильмов),
+    Twilight Saga Wiki (Fandom).<br>
+    <span class="np">Кадры — реальные промо-стиллы и скриншоты из фильмов, сохранённые локально в папке images/. Страница работает офлайн.</span>
+  </div>
+</footer>
+
+<script id="data" type="application/json">{"films": {"1": "Сумерки (2008)", "2": "Новолуние (2009)", "3": "Затмение (2010)", "4": "Рассвет: Часть 1 (2011)", "5": "Рассвет: Часть 2 (2012)"}, "chars": [{"id": "bella", "ru": "Белла Свон → Белла Каллен", "en": "Isabella «Bella» Swan / Cullen", "race": "Человек → Вампир", "clan": "Клан Калленов (до брака — Свон, люди)", "age": "17–18 лет как человек; 18–19 как вампир", "birth": "13 сентября 1987", "conf": "канон", "actor": "Кристен Стюарт", "films": [1, 2, 3, 4, 5], "img": "bella", "note": "Обращена в вампира в «Рассвет: Часть 1» после рождения Ренессми."}, {"id": "edward", "ru": "Эдвард Каллен", "en": "Edward Cullen", "race": "Вампир", "clan": "Клан Калленов", "age": "17 физически; 104→111 лет хронологически", "birth": "20 июня 1901 (обращён в 1918, в 17 лет)", "conf": "канон", "actor": "Роберт Паттинсон", "films": [1, 2, 3, 4, 5], "img": "edward"}, {"id": "carlisle", "ru": "Карлайл Каллен", "en": "Carlisle Cullen", "race": "Вампир", "clan": "Клан Калленов (основатель)", "age": "23 физически; ≈365+ лет", "birth": "≈1640-е, Лондон (обращён в 1663, в 23 года)", "conf": "≈", "actor": "Питер Фачинелли", "films": [1, 2, 3, 4, 5], "img": "carlisle"}, {"id": "esme", "ru": "Эсми Каллен", "en": "Esme Cullen", "race": "Вампир", "clan": "Клан Калленов", "age": "26 физически", "birth": "1895 (обращена в 1921, в 26 лет)", "conf": "канон", "actor": "Элизабет Ризер", "films": [1, 2, 3, 4, 5], "img": "esme"}, {"id": "alice", "ru": "Элис Каллен", "en": "Alice Cullen", "race": "Вампир", "clan": "Клан Калленов", "age": "19 физически", "birth": "≈1901, Билокси, Миссисипи (обращена ≈1920)", "conf": "≈", "actor": "Эшли Грин", "films": [1, 2, 3, 4, 5], "img": "alice", "note": "Дар — предвидение будущего."}, {"id": "emmett", "ru": "Эмметт Каллен", "en": "Emmett Cullen", "race": "Вампир", "clan": "Клан Калленов", "age": "20 физически", "birth": "1915 (обращён в 1935, в 20 лет)", "conf": "канон", "actor": "Келлан Латс", "films": [1, 2, 3, 4, 5], "img": "emmett"}, {"id": "rosalie", "ru": "Розали Хейл", "en": "Rosalie Hale", "race": "Вампир", "clan": "Клан Калленов", "age": "18 физически", "birth": "1915 (обращена в 1933, в 18 лет)", "conf": "канон", "actor": "Никки Рид", "films": [1, 2, 3, 4, 5], "img": "rosalie"}, {"id": "jasper", "ru": "Джаспер Хейл", "en": "Jasper Hale", "race": "Вампир", "clan": "Клан Калленов (ранее — армия Конфедерации, клан Марии)", "age": "19–20 физически", "birth": "1844, Техас (обращён в 1863, в 19 лет)", "conf": "канон", "actor": "Джексон Рэтбоун", "films": [1, 2, 3, 4, 5], "img": "jasper", "note": "Дар — управление эмоциями окружающих."}, {"id": "renesmee", "ru": "Ренессми Каллен", "en": "Renesmee Cullen", "race": "Гибрид", "clan": "Клан Калленов", "age": "хронологически <1 года; физически растёт ускоренно (к финалу ≈6–7 лет на вид)", "birth": "сентябрь 2006", "conf": "канон", "actor": "Маккензи Фой", "films": [4, 5], "img": "renesmee", "note": "В «Рассвет-1» младенец — CGI/аниматроника; Ренессми-ребёнка играют Маккензи Фой (и Кристин Бёрк и др. в эпизодах)."}, {"id": "aro", "ru": "Аро", "en": "Aro", "race": "Вампир", "clan": "Вольтури (лидер)", "age": "≈3 300+ лет; выглядит на ~45", "birth": "≈1340 г. до н.э., Греция (обращён в ~25 лет)", "conf": "канон", "actor": "Майкл Шин", "films": [2, 4, 5], "img": "aro", "note": "Дар — чтение всех мыслей при прикосновении."}, {"id": "caius", "ru": "Кай", "en": "Caius", "race": "Вампир", "clan": "Вольтури (лидер)", "age": "≈3 400+ лет; выглядит на ~45", "birth": "≈XV–XIV вв. до н.э. (обращён на ~50-м году)", "conf": "≈", "actor": "Джейми Кэмпбелл Бауэр", "films": [2, 4, 5], "img": "caius"}, {"id": "marcus", "ru": "Марк", "en": "Marcus", "race": "Вампир", "clan": "Вольтури (лидер)", "age": "≈3 300+ лет; выглядит на ~40", "birth": "≈XIV в. до н.э. (обращён в 19 лет)", "conf": "канон", "actor": "Кристофер Хейердал", "films": [2, 4, 5], "img": "marcus", "note": "Дар — видение эмоциональных связей."}, {"id": "jane", "ru": "Джейн", "en": "Jane", "race": "Вампир", "clan": "Вольтури (гвардия)", "age": "≈800 лет; выглядит на ~12–14", "birth": "≈XIII век, Англия (обращена ребёнком/подростком)", "conf": "≈", "actor": "Дакота Фаннинг", "films": [2, 3, 5], "img": "jane", "note": "Дар — иллюзия боли."}, {"id": "alec", "ru": "Алек", "en": "Alec", "race": "Вампир", "clan": "Вольтури (гвардия)", "age": "≈800 лет; выглядит на ~14", "birth": "≈XIII век, Англия (близнец Джейн, обращён подростком)", "conf": "≈", "actor": "Кэмерон Брайт", "films": [2, 3, 5], "img": "alec", "note": "Дар — полное отключение чувств."}, {"id": "demetri", "ru": "Деметрий", "en": "Demetri", "race": "Вампир", "clan": "Вольтури (гвардия)", "age": "неизвестен; выглядит на ~30", "birth": "не указан в каноне", "conf": "≈", "actor": "Чарли Бьюли", "films": [2, 3, 4, 5], "img": "demetri", "note": "Дар — безошибочное выслеживание."}, {"id": "felix", "ru": "Феликс", "en": "Felix", "race": "Вампир", "clan": "Вольтури (гвардия)", "age": "неизвестен; выглядит на ~35", "birth": "не указан в каноне", "conf": "≈", "actor": "Дэниэл Кадмор", "films": [2, 3, 4, 5], "img": "felix"}, {"id": "heidi", "ru": "Хайди", "en": "Heidi", "race": "Вампир", "clan": "Вольтури (приманка)", "age": "неизвестен; выглядит на ~25", "birth": "не указан в каноне", "conf": "≈", "actor": "Нут Сиар", "films": [2], "img": "heidi"}, {"id": "santiago", "ru": "Сантьяго", "en": "Santiago", "race": "Вампир", "clan": "Вольтури (гвардия)", "age": "неизвестен; выглядит на ~30", "birth": "не указан в каноне", "conf": "≈", "actor": "Латиф Кроудер", "films": [5], "img": "santiago"}, {"id": "tanya", "ru": "Таня", "en": "Tanya", "race": "Вампир", "clan": "Клан Денали (Аляска)", "age": "выглядит на ~28", "birth": "не указан в каноне", "conf": "≈", "actor": "МиАнна Бёринг", "films": [4, 5], "img": "tanya"}, {"id": "kate", "ru": "Кейт", "en": "Kate", "race": "Вампир", "clan": "Клан Денали", "age": "выглядит на ~28", "birth": "не указан в каноне", "conf": "≈", "actor": "Кейси ЛаБоу", "films": [4, 5], "img": "kate", "note": "Дар — электрический заряд на коже."}, {"id": "irina", "ru": "Ирина", "en": "Irina", "race": "Вампир", "clan": "Клан Денали", "age": "выглядит на ~30", "birth": "не указан в каноне", "conf": "≈", "actor": "Мэгги Грейс", "films": [4, 5], "img": "irina", "note": "Именно она доносит Вольтури о «бессмертном ребёнке»."}, {"id": "eleazar", "ru": "Элеазар", "en": "Eleazar", "race": "Вампир", "clan": "Клан Денали (ранее — Вольтури)", "age": "выглядит на ~40", "birth": "≈XVIII век", "conf": "≈", "actor": "Кристиан Камарго", "films": [4, 5], "img": "eleazar", "note": "Дар — распознавание способностей."}, {"id": "carmen", "ru": "Кармен", "en": "Carmen", "race": "Вампир", "clan": "Клан Денали", "age": "выглядит на ~30", "birth": "не указан в каноне", "conf": "≈", "actor": "Миа Маэстро", "films": [4, 5], "img": "carmen"}, {"id": "laurent", "ru": "Лоран", "en": "Laurent", "race": "Вампир", "clan": "Клан Денали (ранее — ковен Джеймса)", "age": "выглядит на ~30", "birth": "не указан в каноне", "conf": "≈", "actor": "Эди Гатеги", "films": [1, 2], "img": "laurent", "note": "Погибает в «Новолунии» от стаи оборотней."}, {"id": "vasilii", "ru": "Василий", "en": "Vasilii", "race": "Вампир", "clan": "Клан Денали (казнён Вольтури; флэшбек)", "age": "выглядит на ~20", "birth": "не указан в каноне", "conf": "≈", "actor": "Билли Вагенселлер", "films": [4, 5], "img": "vasilii"}, {"id": "sasha", "ru": "Саша", "en": "Sasha", "race": "Вампир", "clan": "Клан Денали (казнена Вольтури; флэшбек)", "age": "выглядит на ~30", "birth": "не указан в каноне", "conf": "≈", "actor": "Андреа Пауэлл", "films": [5], "img": "sasha", "note": "Создала «бессмертного ребёнка» — за это клан был наказан."}, {"id": "zafrina", "ru": "Зафрина", "en": "Zafrina", "race": "Вампир", "clan": "Амазонский клан", "age": "выглядит на ~30", "birth": "не указан в каноне", "conf": "≈", "actor": "Джуди Шекони", "films": [5], "img": "zafrina", "note": "Дар — создание иллюзий."}, {"id": "senna", "ru": "Сенна", "en": "Senna", "race": "Вампир", "clan": "Амазонский клан", "age": "выглядит на ~30", "birth": "не указан в каноне", "conf": "≈", "actor": "Трейси Хеггинс", "films": [5], "img": "senna"}, {"id": "benjamin", "ru": "Бенджамин", "en": "Benjamin", "race": "Вампир", "clan": "Египетский клан", "age": "выглядит на ~25", "birth": "не указан в каноне (древний)", "conf": "≈", "actor": "Рами Малек", "films": [5], "img": "benjamin", "note": "Дар — управление стихиями."}, {"id": "tia", "ru": "Тиа", "en": "Tia", "race": "Вампир", "clan": "Египетский клан", "age": "выглядит на ~25", "birth": "не указан в каноне", "conf": "≈", "actor": "Анджела Сарафян", "films": [5], "img": "tia"}, {"id": "amun", "ru": "Амун", "en": "Amun", "race": "Вампир", "clan": "Египетский клан", "age": "выглядит на ~40", "birth": "не указан в каноне (древний)", "conf": "≈", "actor": "Омар Метуолли", "films": [5], "img": "amun"}, {"id": "kebi", "ru": "Кеби", "en": "Kebi", "race": "Вампир", "clan": "Египетский клан", "age": "выглядит на ~30", "birth": "не указан в каноне", "conf": "≈", "actor": "Андреа Гэбриел", "films": [5], "img": "kebi"}, {"id": "henri", "ru": "Анри", "en": "Henri", "race": "Вампир", "clan": "Французский клан", "age": "выглядит на ~30", "birth": "не указан в каноне", "conf": "≈", "actor": "Амаду Ли", "films": [5], "img": "henri"}, {"id": "yvette", "ru": "Иветта", "en": "Yvette", "race": "Вампир", "clan": "Французский клан", "age": "выглядит на ~25", "birth": "не указан в каноне", "conf": "≈", "actor": "Джанелль Фрёлих", "films": [5], "img": "yvette"}, {"id": "siobhan", "ru": "Шивон", "en": "Siobhan", "race": "Вампир", "clan": "Ирландский клан", "age": "выглядит на ~30", "birth": "не указан в каноне", "conf": "≈", "actor": "Лиза Ховард", "films": [5], "img": "siobhan"}, {"id": "liam", "ru": "Лиам", "en": "Liam", "race": "Вампир", "clan": "Ирландский клан", "age": "выглядит на ~30", "birth": "не указан в каноне", "conf": "≈", "actor": "Патрик Бреннан", "films": [5], "img": "liam"}, {"id": "maggie_i", "ru": "Мэгги", "en": "Maggie", "race": "Вампир", "clan": "Ирландский клан", "age": "выглядит на ~25", "birth": "не указан в каноне", "conf": "≈", "actor": "Марлэн Барнс", "films": [5], "img": "maggie_i", "note": "Дар — распознавание правды."}, {"id": "stefan", "ru": "Штефан", "en": "Stefan", "race": "Вампир", "clan": "Румынский клан", "age": "выглядит на ~45", "birth": "не указан в каноне (древний)", "conf": "≈", "actor": "Гури Вайнберг", "films": [5], "img": "stefan"}, {"id": "vladimir", "ru": "Владимир", "en": "Vladimir", "race": "Вампир", "clan": "Румынский клан", "age": "выглядит на ~45", "birth": "не указан в каноне (древний)", "conf": "≈", "actor": "Ноэл Фишер", "films": [5], "img": "vladimir"}, {"id": "victoria", "ru": "Виктория", "en": "Victoria", "race": "Вампир (кочевник)", "clan": "Ковен Джеймса → одиночка-кочевник", "age": "выглядит на ~25", "birth": "не указан в каноне", "conf": "≈", "actor": "Рашель ЛеФевр («Сумерки», «Новолуние») → Брайс Даллас Ховард («Затмение»)", "films": [1, 2, 3], "img": "victoria", "note": "РЕКАСТ: в 1–2 фильмах ЛеФевр, в 3-м — Ховард; в «Рассвет-1» — архивные кадры ЛеФевр."}, {"id": "james", "ru": "Джеймс", "en": "James", "race": "Вампир (кочевник)", "clan": "Ковен Джеймса (трекер)", "age": "выглядит на ~30", "birth": "не указан в каноне", "conf": "≈", "actor": "Кэм Жиганде", "films": [1], "img": "james", "note": "Главный антагонист «Сумерек»; убит Калленами."}, {"id": "garrett", "ru": "Гарретт", "en": "Garrett", "race": "Вампир (кочевник)", "clan": "Американские кочевники", "age": "выглядит на ~35", "birth": "не указан в каноне", "conf": "≈", "actor": "Ли Пейс", "films": [5], "img": "garrett"}, {"id": "mary", "ru": "Мэри", "en": "Mary", "race": "Вампир (кочевник)", "clan": "Американские кочевники", "age": "выглядит на ~30", "birth": "не указан в каноне", "conf": "≈", "actor": "Тони Тракс", "films": [5], "img": "mary"}, {"id": "peter", "ru": "Питер", "en": "Peter", "race": "Вампир (кочевник)", "clan": "Американские кочевники (ранее — клан Марии)", "age": "выглядит на ~35", "birth": "не указан в каноне", "conf": "≈", "actor": "Эрик Одом", "films": [5], "img": "peter"}, {"id": "charlotte", "ru": "Шарлотта", "en": "Charlotte", "race": "Вампир (кочевник)", "clan": "Американские кочевники", "age": "выглядит на ~25", "birth": "не указан в каноне", "conf": "≈", "actor": "Валори Карри", "films": [5], "img": "charlotte"}, {"id": "randall", "ru": "Рэндалл", "en": "Randall", "race": "Вампир (кочевник)", "clan": "Американские кочевники", "age": "выглядит на ~40", "birth": "не указан в каноне", "conf": "≈", "actor": "Билл Тангради", "films": [5], "img": "randall"}, {"id": "alistair", "ru": "Алистер", "en": "Alistair", "race": "Вампир (кочевник)", "clan": "Европейские кочевники", "age": "выглядит на ~50", "birth": "не указан в каноне", "conf": "≈", "actor": "Джо Андерсон", "films": [5], "img": "alistair", "note": "Дар — выслеживание; старый знакомый Карлайла."}, {"id": "riley", "ru": "Райли Бирс", "en": "Riley Biers", "race": "Вампир (новорождённый)", "clan": "Армия новорождённых (Сиэтл); создан Викторией", "age": "≈25 (обращён незадолго до событий)", "birth": "≈середина 1980-х", "conf": "≈", "actor": "Хавьер Сэмюэл", "films": [3], "img": "riley"}, {"id": "bree", "ru": "Бри Таннер", "en": "Bree Tanner", "race": "Вампир (новорождённый)", "clan": "Армия новорождённых (Сиэтл)", "age": "≈15–16 (обращена незадолго до событий)", "birth": "≈1994–95", "conf": "≈", "actor": "Джодель Ферланд", "films": [3], "img": "bree", "note": "Героиня спин-оффа «Короткая вторая жизнь Бри Таннер»."}, {"id": "maria", "ru": "Мария", "en": "Maria", "race": "Вампир", "clan": "Клан Марии (южные войны, Монтеррей)", "age": "выглядит на ~30", "birth": "не указан в каноне (XIX век)", "conf": "≈", "actor": "Каталина Сандино Морено", "films": [3], "img": "maria", "note": "Создательница Джаспера."}, {"id": "nette", "ru": "Нетти", "en": "Nettie", "race": "Вампир (новорождённый)", "clan": "Клан Марии / армия новорождённых", "age": "выглядит на ~20", "birth": "не указан в каноне", "conf": "≈", "actor": "Лиа Гибсон", "films": [3], "img": "nette"}, {"id": "lucy", "ru": "Люси", "en": "Lucy", "race": "Вампир (новорождённый)", "clan": "Клан Марии / армия новорождённых", "age": "выглядит на ~20", "birth": "не указан в каноне", "conf": "≈", "actor": "Кирстен Зин (Кирстен Праут)", "films": [3], "img": "lucy"}, {"id": "coldone", "ru": "Холодный (камео)", "en": "Cold One", "race": "Вампир", "clan": "— (камео)", "age": "неизвестен", "birth": "не указан", "conf": "≈", "actor": "Питер Мёрфи", "films": [1], "img": "coldone", "note": "Камео музыканта Питера Мёрфи в баре."}, {"id": "vampiress", "ru": "Прекрасная вампирша", "en": "Beautiful Vampiress (Cold Woman)", "race": "Вампир", "clan": "— (эпизод)", "age": "неизвестен", "birth": "не указан", "conf": "≈", "actor": "Моник Гандертон", "films": [1], "img": "vampiress"}, {"id": "nahuel", "ru": "Науэль", "en": "Nahuel", "race": "Гибрид", "clan": "Южноамериканские гибриды", "age": "≈150 лет; выглядит на ~30", "birth": "≈1850-е", "conf": "≈", "actor": "Джей Ди Пардо", "films": [5], "img": "nahuel", "note": "Сын вампира и женщины-оборотня; доказательство безвредности Ренессми."}, {"id": "jacob", "ru": "Джейкоб Блэк", "en": "Jacob Black", "race": "Оборотень", "clan": "Квилеутская стая (стая Улей → стая Блэка)", "age": "15→16 лет", "birth": "14 января 1990 (≈)", "conf": "≈", "actor": "Тейлор Лотнер", "films": [1, 2, 3, 4, 5], "img": "jacob"}, {"id": "sam", "ru": "Сэм Ули", "en": "Sam Uley", "race": "Оборотень", "clan": "Квилеутская стая (альфа)", "age": "≈21–22", "birth": "≈1987–88", "conf": "≈", "actor": "Соломон Тримбл («Сумерки», в титрах «друг Джейкоба») → Часке Спенсер (со «Новолуния»)", "films": [1, 2, 3, 4, 5], "img": "sam", "note": "РЕКАСТ: в 1-м фильме роль исполнил Соломон Тримбл."}, {"id": "embry", "ru": "Эмбри Колл", "en": "Embry Call", "race": "Оборотень", "clan": "Квилеутская стая", "age": "≈16", "birth": "≈1993–94", "conf": "≈", "actor": "Крис Хаятт («Сумерки», без титров) → Кайова Гордон", "films": [1, 2, 3, 4, 5], "img": "embry"}, {"id": "quil", "ru": "Квил Атеара V", "en": "Quil Ateara V", "race": "Оборотень", "clan": "Квилеутская стая", "age": "≈16", "birth": "≈1993–94", "conf": "≈", "actor": "Тайсон Хаусман", "films": [2, 3, 4, 5], "img": "quil", "note": "Импринтинг на двухлетнюю Клэр Янг."}, {"id": "paul", "ru": "Пол Лахот", "en": "Paul Lahote", "race": "Оборотень", "clan": "Квилеутская стая", "age": "≈16–17", "birth": "≈1992–93", "conf": "≈", "actor": "Алекс Мераз", "films": [2, 3, 4, 5], "img": "paul"}, {"id": "jared", "ru": "Джаред Камерон", "en": "Jared Cameron", "race": "Оборотень", "clan": "Квилеутская стая", "age": "≈16–17", "birth": "≈1992–93", "conf": "≈", "actor": "Бронсон Пеллетье", "films": [2, 3, 4, 5], "img": "jared"}, {"id": "leah", "ru": "Лия Клируотер", "en": "Leah Clearwater", "race": "Оборотень", "clan": "Квилеутская стая → стая Блэка", "age": "≈19–20", "birth": "≈1989–90", "conf": "≈", "actor": "Джулия Джонс", "films": [3, 4, 5], "img": "leah", "note": "Единственная женщина-оборотень в стае."}, {"id": "seth", "ru": "Сет Клируотер", "en": "Seth Clearwater", "race": "Оборотень", "clan": "Квилеутская стая → стая Блэка", "age": "≈15–16", "birth": "≈1994–95", "conf": "≈", "actor": "Бубу Стюарт", "films": [3, 4, 5], "img": "seth"}, {"id": "tahaaki", "ru": "Таха Аки", "en": "Taha Aki", "race": "Оборотень", "clan": "Древние квилютты (флэшбек-легенда)", "age": "легендарный предок", "birth": "не указан", "conf": "≈", "actor": "Байрон Чиф-Мун", "films": [3], "img": "tahaaki"}, {"id": "huilen", "ru": "Хуилен", "en": "Huilen", "race": "Оборотень", "clan": "Южноамериканское племя оборотней (флэшбек)", "age": "неизвестен", "birth": "не указан", "conf": "≈", "actor": "Мариса Куинн", "films": [5], "img": "huilen", "note": "Мать Науэля."}, {"id": "charlie", "ru": "Чарли Сван", "en": "Charlie Swan", "race": "Человек", "clan": "Люди · Форкс (шеф полиции)", "age": "≈40–42", "birth": "≈1965 (точно не указан)", "conf": "≈", "actor": "Билли Бёрк", "films": [1, 2, 3, 4, 5], "img": "charlie"}, {"id": "billy", "ru": "Билли Блэк", "en": "Billy Black", "race": "Человек", "clan": "Люди · Ла-Пуш (совет старейшин квилюттов)", "age": "≈55–60", "birth": "≈1950-е", "conf": "≈", "actor": "Гил Бирмингем", "films": [1, 2, 3, 4], "img": "billy", "note": "Отец Джейкоба; передвигается в инвалидном кресле."}, {"id": "renee", "ru": "Рене Двайер", "en": "Renée Dwyer", "race": "Человек", "clan": "Люди · Джэксонвилл", "age": "≈38–40", "birth": "1968", "conf": "канон", "actor": "Сара Кларк", "films": [1, 3, 4], "img": "renee"}, {"id": "phil", "ru": "Фил Двайер", "en": "Phil Dwyer", "race": "Человек", "clan": "Люди", "age": "≈40", "birth": "≈1970-е", "conf": "≈", "actor": "Мэтт Бушелл («Сумерки») → Тай Олссон («Рассвет-1»)", "films": [1, 4], "img": "phil"}, {"id": "sue", "ru": "Сью Клируотер", "en": "Sue Clearwater", "race": "Человек", "clan": "Люди · Ла-Пуш", "age": "≈50", "birth": "≈1960-е", "conf": "≈", "actor": "Алекс Райс", "films": [3, 4, 5], "img": "sue"}, {"id": "harry", "ru": "Гарри Клируотер", "en": "Harry Clearwater", "race": "Человек", "clan": "Люди · Ла-Пуш (совет старейшин)", "age": "≈60", "birth": "≈1940-50-е", "conf": "≈", "actor": "Грэм Грин", "films": [2], "img": "harry", "note": "Умирает от сердечного приступа в «Новолунии»."}, {"id": "emily", "ru": "Эмили Янг", "en": "Emily Young", "race": "Человек", "clan": "Люди · Ла-Пуш", "age": "≈25–30", "birth": "≈1980-е", "conf": "≈", "actor": "Тинсел Кори", "films": [2, 3, 4, 5], "img": "emily", "note": "Невеста Сэма; шрамы от его первого обращения."}, {"id": "rachel", "ru": "Рэйчел Блэк", "en": "Rachel Black", "race": "Человек", "clan": "Люди · Ла-Пуш", "age": "≈20", "birth": "≈1989–90", "conf": "≈", "actor": "Таная Битти", "films": [4], "img": "rachel"}, {"id": "claire", "ru": "Клэр Янг", "en": "Claire Young", "race": "Человек", "clan": "Люди", "age": "≈3", "birth": "≈2007", "conf": "≈", "actor": "Сиенна Джозеф", "films": [3], "img": "claire"}, {"id": "jessica", "ru": "Джессика Стэнли", "en": "Jessica Stanley", "race": "Человек", "clan": "Люди · Форкс (школа)", "age": "16–17", "birth": "≈1987–88", "conf": "≈", "actor": "Анна Кендрик", "films": [1, 2, 3, 4], "img": "jessica", "note": "В фильме объединены Джессика и Лорен из книги."}, {"id": "mike", "ru": "Майк Ньютон", "en": "Mike Newton", "race": "Человек", "clan": "Люди · Форкс (школа)", "age": "16–17", "birth": "≈1987–88", "conf": "≈", "actor": "Майкл Уэлч", "films": [1, 2, 3, 4], "img": "mike"}, {"id": "angela", "ru": "Анджела Уэбер", "en": "Angela Weber", "race": "Человек", "clan": "Люди · Форкс (школа)", "age": "16–17", "birth": "≈1987–88", "conf": "≈", "actor": "Кристиан Серратос", "films": [1, 2, 3, 4], "img": "angela"}, {"id": "eric", "ru": "Эрик Йорки", "en": "Eric Yorkie", "race": "Человек", "clan": "Люди · Форкс (школа)", "age": "16–17", "birth": "≈1987–88", "conf": "≈", "actor": "Джастин Чон", "films": [1, 2, 3, 4], "img": "eric"}, {"id": "tyler", "ru": "Тайлер Кроули", "en": "Tyler Crowley", "race": "Человек", "clan": "Люди · Форкс (школа)", "age": "17", "birth": "≈1987–88", "conf": "≈", "actor": "Грегори Тайри Бойс", "films": [1], "img": "tyler"}, {"id": "waylon", "ru": "Уэйлон Фордж", "en": "Waylon Forge", "race": "Человек", "clan": "Люди · Форкс", "age": "≈45–50", "birth": "≈1960-е", "conf": "≈", "actor": "Нед Беллами", "films": [1], "img": "waylon", "note": "Добавлен только в фильм; первая жертва трио Джеймса."}, {"id": "molina", "ru": "Мистер Молина", "en": "Mr. Molina", "race": "Человек", "clan": "Люди · Форкс (учитель биологии)", "age": "≈40", "birth": "не указан", "conf": "≈", "actor": "Хосе Суньига", "films": [1], "img": "molina"}, {"id": "cope", "ru": "Миссис Коуп", "en": "Ms. Cope", "race": "Человек", "clan": "Люди · школа Форкса", "age": "≈40", "birth": "не указан", "conf": "≈", "actor": "Триш Иган", "films": [1], "img": "cope"}, {"id": "cora", "ru": "Кора", "en": "Cora", "race": "Человек", "clan": "Люди · Форкс", "age": "не указан", "birth": "не указан", "conf": "≈", "actor": "Аянна Беркшир", "films": [1], "img": "cora"}, {"id": "waitress", "ru": "Официантка", "en": "Waitress", "race": "Человек", "clan": "Люди · Порт-Анджелес", "age": "не указан", "birth": "не указан", "conf": "≈", "actor": "Кэти Пауэрс", "films": [1], "img": "waitress"}, {"id": "gianna", "ru": "Джанна", "en": "Gianna", "race": "Человек", "clan": "Люди · Вольтерра (приёмная Вольтури)", "age": "≈25", "birth": "не указан", "conf": "≈", "actor": "Жюстин Вашбергер", "films": [2], "img": "gianna"}, {"id": "royce", "ru": "Ройс Кинг II", "en": "Royce King II", "race": "Человек", "clan": "Люди · Мемфис (флэшбек 1930-х)", "age": "≈25–30", "birth": "≈1905–10", "conf": "≈", "actor": "Джек Хьюстон", "films": [3], "img": "royce", "note": "Жених Розали, предавший её."}, {"id": "john", "ru": "Джон", "en": "John", "race": "Человек", "clan": "Люди (флэшбек Розали)", "age": "не указан", "birth": "не указан", "conf": "≈", "actor": "Бен Гелдрайх", "films": [3], "img": "john"}, {"id": "thirdwife", "ru": "Третья жена", "en": "Third Wife", "race": "Человек", "clan": "Люди (флэшбек-легенда квилюттов)", "age": "не указан", "birth": "не указан", "conf": "≈", "actor": "Мариэль Беланже", "films": [3], "img": "thirdwife"}, {"id": "vera", "ru": "Вера", "en": "Vera", "race": "Человек", "clan": "Люди (флэшбек)", "age": "не указан", "birth": "не указан", "conf": "≈", "actor": "Сабрина Фрэнк", "films": [3], "img": "vera"}, {"id": "kaure", "ru": "Кауре", "en": "Kaure", "race": "Человек", "clan": "Люди · Бразилия (прислуга)", "age": "не указан", "birth": "не указан", "conf": "≈", "actor": "Каролина Виргес", "films": [4], "img": "kaure"}, {"id": "gustavo", "ru": "Густаво", "en": "Gustavo", "race": "Человек", "clan": "Люди · Бразилия", "age": "не указан", "birth": "не указан", "conf": "≈", "actor": "Себастьян Лемос", "films": [4], "img": "gustavo"}, {"id": "bianca", "ru": "Бьянка", "en": "Bianca", "race": "Человек", "clan": "Люди", "age": "не указан", "birth": "не указан", "conf": "≈", "actor": "Али Фолкнер", "films": [4], "img": "bianca"}, {"id": "kim", "ru": "Ким", "en": "Kim", "race": "Человек", "clan": "Люди", "age": "не указан", "birth": "не указан", "conf": "≈", "actor": "Кейтлин Муни Фу", "films": [4], "img": "kim"}, {"id": "jenks", "ru": "Джей Дженкс", "en": "J. Jenks", "race": "Человек", "clan": "Люди (подделка документов)", "age": "≈45–50", "birth": "не указан", "conf": "≈", "actor": "Уэнделл Пирс", "films": [5], "img": "jenks"}, {"id": "meyer", "ru": "Камео: посетительница / гостья", "en": "Stephenie Meyer (cameo)", "race": "Человек", "clan": "— (камео автора)", "age": "—", "birth": "24 декабря 1973", "conf": "канон", "actor": "Стефани Майер", "films": [1, 4], "img": "meyer", "note": "Автор книг появляется камео: в закусочной («Сумерки») и на свадьбе («Рассвет-1»)."}], "stats": {"total": 95, "with_photo": 55, "per_film": {"1": 31, "2": 33, "3": 41, "4": 44, "5": 57}}}</script>
+<script>
+var D=JSON.parse(document.getElementById('data').textContent);
+var CH=D.chars, FILMS=D.films, ST=D.stats;
+
+var RACE_COLOR={
+ "Вампир":"var(--vamp)","Вампир (новорождённый)":"var(--newb)","Вампир (кочевник)":"var(--nomad)",
+ "Оборотень":"var(--wolf)","Человек":"var(--hum)","Гибрид":"var(--hyb)"};
+function rc(r){return RACE_COLOR[r]||"#888"}
+function baseRace(r){return r.split(" (")[0]}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+
+/* шапка */
+document.getElementById('filmstrip').innerHTML=Object.keys(FILMS).map(function(k){
+  return '<span class="ftag"><b>'+k+'</b> · '+esc(FILMS[k])+' — персонажей: '+ST.per_film[k]+'</span>';
+}).join("");
+document.getElementById('stats').innerHTML=
+  '<div class="stat"><b>'+ST.total+'</b><span>персонажей</span></div>'+
+  '<div class="stat"><b>'+ST.with_photo+'</b><span>с кадрами</span></div>'+
+  '<div class="stat"><b>'+(ST.total-ST.with_photo)+'</b><span>эпизоды (без кадра)</span></div>'+
+  '<div class="stat"><b>5</b><span>фильмов</span></div>';
+document.getElementById('totalAll').textContent=ST.total;
+
+/* фильтры */
+var fRace="all", fClan="all", fFilm=0, fPhoto=false, fQ="";
+var RACES=["all","Вампир","Оборотень","Человек","Гибрид"];
+function clanNorm(c){return c.split(" (")[0].split(" →")[0]}
+var CLANS=(function(){var s={};CH.forEach(function(c){s[clanNorm(c.clan)]=1});return Object.keys(s).sort()})();
+
+function paintRace(){
+  document.getElementById('raceChips').innerHTML=RACES.map(function(r){
+    var label=r==="all"?"Все расы":r;
+    var col=r==="all"?"#cdd6ea":rc(r);
+    return '<button class="chip'+(fRace===r?" on":"")+'" data-r="'+r+'" style="--cc:'+col+'">'+label+'</button>';
+  }).join("");
+  Array.prototype.forEach.call(document.querySelectorAll('#raceChips .chip'),function(b){
+    b.onclick=function(){fRace=b.getAttribute('data-r');paintRace();render()};
+  });
+}
+function paintFilm(){
+  var h='<button class="chip'+(fFilm===0?" on":"")+'" data-f="0" style="--cc:#cdd6ea">Все фильмы</button>';
+  Object.keys(FILMS).forEach(function(k){
+    h+='<button class="chip'+(fFilm==k?" on":"")+'" data-f="'+k+'" style="--cc:#d8b45e">'+k+'</button>';
+  });
+  document.getElementById('filmChips').innerHTML=h;
+  Array.prototype.forEach.call(document.querySelectorAll('#filmChips .chip'),function(b){
+    b.onclick=function(){fFilm=parseInt(b.getAttribute('data-f'),10);paintFilm();render()};
+  });
+}
+(function(){
+  var sel=document.getElementById('clanSel');
+  sel.innerHTML='<option value="all">Все кланы и группы</option>'+CLANS.map(function(c){
+    return '<option value="'+esc(c)+'">'+esc(c)+'</option>';
+  }).join("");
+  sel.onchange=function(){fClan=sel.value;render()};
+  document.getElementById('onlyPhoto').onchange=function(){fPhoto=this.checked;render()};
+  document.getElementById('q').oninput=function(){fQ=this.value.toLowerCase().trim();render()};
+})();
+
+var SIL='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.7 0 4.8-2.2 4.8-4.9S14.7 2.2 12 2.2 7.2 4.4 7.2 7.1 9.3 12 12 12zm0 2.3c-3.9 0-8 2-8 5v2.5h16v-2.5c0-3-4.1-5-8-5z"/></svg>';
+
+function filmChipsHtml(f){return '<span class="films">'+f.map(function(k){return '<span class="fchip">'+k+'</span>'}).join("")+'</span>'}
+
+function cardHtml(c){
+  var ph;
+  if(c.img){
+    ph='<img loading="lazy" src="images/'+c.img+'.jpg" alt="'+esc(c.ru)+'">'+filmChipsHtml(c.films);
+  }else{
+    ph='<div class="noimg">'+SIL+'<span>кадр не найден</span></div>'+filmChipsHtml(c.films);
+  }
+  return '<article class="card">'+
+    '<div class="ph" style="--rc:'+rc(c.race)+'">'+ph+'<span class="badge">'+esc(c.race)+'</span></div>'+
+    '<div class="cb">'+
+      '<div><h3 class="cn">'+esc(c.ru)+'</h3><div class="cen">'+esc(c.en)+'</div></div>'+
+      '<div class="cact">🎭 '+esc(c.actor)+'</div>'+
+      '<dl class="meta">'+
+        '<dt>Возраст</dt><dd><b>'+esc(c.age)+'</b></dd>'+
+        '<dt>Рождение</dt><dd><b>'+esc(c.birth)+'</b><span class="conf">'+(c.conf==="канон"?"канон":"≈")+'</span></dd>'+
+        '<dt>Раса</dt><dd>'+esc(c.race)+'</dd>'+
+        '<dt>Клан</dt><dd>'+esc(c.clan)+'</dd>'+
+        (c.note?'<div class="note">↳ '+esc(c.note)+'</div>':'')+
+      '</dl>'+
+    '</div></article>';
+}
+function rowHtml(c){
+  var ph=c.img?'<img class="tph" loading="lazy" src="images/'+c.img+'.jpg" alt="">':'<span class="tph none">—</span>';
+  return '<tr>'+
+    '<td>'+ph+'</td>'+
+    '<td><b>'+esc(c.ru)+'</b><br><span style="color:var(--dim);font-size:11.5px">'+esc(c.en)+'</span></td>'+
+    '<td><span class="pill" style="--rc:'+rc(c.race)+'">'+esc(c.race)+'</span></td>'+
+    '<td>'+esc(c.clan)+'</td>'+
+    '<td>'+esc(c.age)+'</td>'+
+    '<td>'+esc(c.birth)+'<span class="conf">'+(c.conf==="канон"?"канон":"≈")+'</span></td>'+
+    '<td>'+esc(c.actor)+'</td>'+
+    '<td class="fmini">'+c.films.join(" · ")+'</td>'+
+  '</tr>';
+}
+function match(c){
+  if(fRace!=="all" && baseRace(c.race)!==fRace) return false;
+  if(fClan!=="all" && clanNorm(c.clan)!==fClan) return false;
+  if(fFilm && c.films.indexOf(fFilm)===-1) return false;
+  if(fPhoto && !c.img) return false;
+  if(fQ){
+    var hay=(c.ru+" "+c.en+" "+c.actor+" "+c.clan+" "+c.race).toLowerCase();
+    if(hay.indexOf(fQ)===-1) return false;
+  }
+  return true;
+}
+function render(){
+  var list=CH.filter(match);
+  document.getElementById('grid').innerHTML=list.map(cardHtml).join("");
+  document.getElementById('tbody').innerHTML=list.map(rowHtml).join("");
+  document.getElementById('shown').textContent=list.length;
+  document.getElementById('empty').style.display=list.length?"none":"block";
+}
+paintRace();paintFilm();render();
+
+/* фактчек */
+(function(){
+  var recasts=[
+    ["Виктория","Рашель ЛеФевр («Сумерки», «Новолуние») → Брайс Даллас Ховард («Затмение»); в «Рассвет-1» — архивные кадры ЛеФевр."],
+    ["Сэм Ули","В «Сумерках» роль сыграл Соломон Тримбл (в титрах «друг Джейкоба»), с «Новолуния» — Часке Спенсер."],
+    ["Эмбри Колл","В «Сумерках» — Крис Хаятт (без титров), далее — Кайова Гордон."],
+    ["Фил Двайер","В «Сумерках» — Мэтт Бушелл, в «Рассвет-1» — Тай Олссон."],
+    ["Ренессми","Младенца в «Рассвет-1» играли CGI/аниматроника; ребёнка — Маккензи Фой (плюс Кристин Бёрк и др. в эпизодах разного возраста)."]
+  ];
+  var uncred=[
+    ["Стефани Майер","камео автора: посетительница закусочной («Сумерки») и гостья на свадьбе («Рассвет-1»)."],
+    ["Питер Мёрфи","музыкант (Bauhaus) в камео «Холодный» в баре («Сумерки»)."],
+    ["Квил → Клэр","линия импринтинга Квила показана в «Затмении» (Клэр — Сиенна Джозеф)."]
+  ];
+  var groups=[
+    ["Клан Калленов","9 карточек: Белла, Эдвард, Карлайл, Эсми, Элис, Эмметт, Розали, Джаспер, Ренессми."],
+    ["Вольтури","9: Аро, Кай, Марк, Джейн, Алек, Деметрий, Феликс, Хайди, Сантьяго."],
+    ["Клан Денали","8: Таня, Кейт, Ирина, Элеазар, Кармен, Лоран, Василий, Саша."],
+    ["Прочие ковены","Амазонский (2), Египетский (4), Французский (2), Ирландский (3), Румынский (2)."],
+    ["Кочевники и новорождённые","Джеймс, Виктория, Гарретт, Мэри, Питер, Шарлотта, Рэндалл, Алистер + новорождённые Райли, Бри, Нетти, Люси и клан Марии."],
+    ["Квилеутская стая","Джейкоб, Сэм, Эмбри, Квил, Пол, Джаред, Лия, Сет + легендарные Таха Аки и Хуилен."],
+    ["Люди","Чарли, Билли, Рене, Фил, Сью, Гарри, Эмили, Рэйчел, Клэр, школьники Форкса, эпизодники и камео."]
+  ];
+  var h="";
+  h+='<div class="fbox"><h4>✓ Полнота по фильмам</h4><ul>'+
+     Object.keys(FILMS).map(function(k){return '<li><b>'+esc(FILMS[k])+'</b> — учтено персонажей: '+ST.per_film[k]+'</li>'}).join("")+
+     '<li>Всего уникальных персонажей: <b>'+ST.total+'</b>; с кадрами: <b>'+ST.with_photo+'</b>.</li></ul></div>';
+  h+='<div class="fbox"><h4>⚠ Рекаты и смены актёров</h4><ul>'+
+     recasts.map(function(r){return '<li><b>'+r[0]+'.</b> '+r[1]+'</li>'}).join("")+'</ul></div>';
+  h+='<div class="fbox"><h4>◈ Камео и особые появления</h4><ul>'+
+     uncred.map(function(r){return '<li><b>'+r[0]+'.</b> '+r[1]+'</li>'}).join("")+'</ul></div>';
+  h+='<div class="fbox"><h4>▣ Покрытие по группам</h4><ul>'+
+     groups.map(function(g){return '<li><b>'+g[0]+'.</b> '+g[1]+'</li>'}).join("")+'</ul></div>';
+  h+='<div class="fbox"><h4>⌗ Достоверность дат</h4><ul>'+
+     '<li><span class="ok">канон</span> — точные даты из книг и «Официального иллюстрированного руководства» (Белла 13.09.1987, Эдвард 20.06.1901, Эсми 1895, Эмметт/Розали 1915, Джаспер 1844, Рене 1968, Ренессми 09.2006 и др.).</li>'+
+     '<li><span class="warn">≈</span> — в каноне год не указан; приведена оценка по внешнему виду/хронологии (например, Вольтури и большинство ковенов).</li>'+
+     '<li>Возраст вампиров дан двойной: физический (внешний) и хронологический.</li></ul></div>';
+  h+='<div class="fbox"><h4>⎘ Источники сверки</h4><ul>'+
+     '<li>Wikipedia — <b>List of The Twilight Saga cast members</b> (таблица появления по 5 фильмам).</li>'+
+     '<li>IMDb — full credits: tt1099212, tt1259571, tt1325004, tt1673434, tt1673431.</li>'+
+     '<li>Twilight Saga Wiki (Fandom) — биографии, даты обращения, кланы.</li>'+
+     '<li>Кадры: промо-стиллы и скриншоты, сохранённые локально (images/).</li></ul></div>';
+  document.getElementById('fc').innerHTML=h;
+})();
+</script>
+</body>
+</html>
