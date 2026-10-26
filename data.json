@@ -333,7 +333,7 @@
    "films": [
     5
    ],
-   "img": null
+   "img": "santiago"
   },
   {
    "id": "tanya",
@@ -449,7 +449,7 @@
     4,
     5
    ],
-   "img": null
+   "img": "vasilii"
   },
   {
    "id": "sasha",
@@ -464,7 +464,7 @@
    "films": [
     5
    ],
-   "img": null,
+   "img": "sasha",
    "note": "Создала «бессмертного ребёнка» — за это клан был наказан."
   },
   {
@@ -496,7 +496,7 @@
    "films": [
     5
    ],
-   "img": null
+   "img": "senna"
   },
   {
    "id": "benjamin",
@@ -527,7 +527,7 @@
    "films": [
     5
    ],
-   "img": null
+   "img": "tia"
   },
   {
    "id": "amun",
@@ -542,7 +542,7 @@
    "films": [
     5
    ],
-   "img": null
+   "img": "amun"
   },
   {
    "id": "kebi",
@@ -557,7 +557,7 @@
    "films": [
     5
    ],
-   "img": null
+   "img": "kebi"
   },
   {
    "id": "henri",
@@ -572,7 +572,7 @@
    "films": [
     5
    ],
-   "img": null
+   "img": "henri"
   },
   {
    "id": "yvette",
@@ -587,7 +587,7 @@
    "films": [
     5
    ],
-   "img": null
+   "img": "yvette"
   },
   {
    "id": "siobhan",
@@ -617,7 +617,7 @@
    "films": [
     5
    ],
-   "img": null
+   "img": "liam"
   },
   {
    "id": "maggie_i",
@@ -632,7 +632,7 @@
    "films": [
     5
    ],
-   "img": null,
+   "img": "maggie_i",
    "note": "Дар — распознавание правды."
   },
   {
@@ -648,7 +648,7 @@
    "films": [
     5
    ],
-   "img": null
+   "img": "stefan"
   },
   {
    "id": "vladimir",
@@ -663,7 +663,7 @@
    "films": [
     5
    ],
-   "img": null
+   "img": "vladimir"
   },
   {
    "id": "victoria",
@@ -727,7 +727,7 @@
    "films": [
     5
    ],
-   "img": null
+   "img": "mary"
   },
   {
    "id": "peter",
@@ -742,7 +742,7 @@
    "films": [
     5
    ],
-   "img": null
+   "img": "peter"
   },
   {
    "id": "charlotte",
@@ -757,7 +757,7 @@
    "films": [
     5
    ],
-   "img": null
+   "img": "charlotte"
   },
   {
    "id": "randall",
@@ -772,7 +772,7 @@
    "films": [
     5
    ],
-   "img": null
+   "img": "randall"
   },
   {
    "id": "alistair",
@@ -850,7 +850,7 @@
    "films": [
     3
    ],
-   "img": null
+   "img": "nette"
   },
   {
    "id": "lucy",
@@ -865,7 +865,7 @@
    "films": [
     3
    ],
-   "img": null
+   "img": "lucy"
   },
   {
    "id": "coldone",
@@ -880,7 +880,7 @@
    "films": [
     1
    ],
-   "img": null,
+   "img": "coldone",
    "note": "Камео музыканта Питера Мёрфи в баре."
   },
   {
@@ -896,7 +896,7 @@
    "films": [
     1
    ],
-   "img": null
+   "img": "vampiress"
   },
   {
    "id": "nahuel",
@@ -1075,7 +1075,7 @@
    "films": [
     3
    ],
-   "img": null
+   "img": "tahaaki"
   },
   {
    "id": "huilen",
@@ -1090,7 +1090,7 @@
    "films": [
     5
    ],
-   "img": null,
+   "img": "huilen",
    "note": "Мать Науэля."
   },
   {
@@ -1162,7 +1162,7 @@
     1,
     4
    ],
-   "img": null
+   "img": "phil"
   },
   {
    "id": "sue",
@@ -1229,7 +1229,7 @@
    "films": [
     4
    ],
-   "img": null
+   "img": "rachel"
   },
   {
    "id": "claire",
@@ -1244,7 +1244,7 @@
    "films": [
     3
    ],
-   "img": null
+   "img": "claire"
   },
   {
    "id": "jessica",
@@ -1363,7 +1363,7 @@
    "films": [
     1
    ],
-   "img": null
+   "img": "molina"
   },
   {
    "id": "cope",
@@ -1378,7 +1378,7 @@
    "films": [
     1
    ],
-   "img": null
+   "img": "cope"
   },
   {
    "id": "cora",
@@ -1393,7 +1393,7 @@
    "films": [
     1
    ],
-   "img": null
+   "img": "cora"
   },
   {
    "id": "waitress",
@@ -1408,7 +1408,7 @@
    "films": [
     1
    ],
-   "img": null
+   "img": "waitress"
   },
   {
    "id": "gianna",
@@ -1423,7 +1423,7 @@
    "films": [
     2
    ],
-   "img": null
+   "img": "gianna"
   },
   {
    "id": "royce",
@@ -1454,7 +1454,7 @@
    "films": [
     3
    ],
-   "img": null
+   "img": "john"
   },
   {
    "id": "thirdwife",
@@ -1469,7 +1469,7 @@
    "films": [
     3
    ],
-   "img": null
+   "img": "thirdwife"
   },
   {
    "id": "vera",
@@ -1484,7 +1484,7 @@
    "films": [
     3
    ],
-   "img": null
+   "img": "vera"
   },
   {
    "id": "kaure",
@@ -1499,7 +1499,7 @@
    "films": [
     4
    ],
-   "img": null
+   "img": "kaure"
   },
   {
    "id": "gustavo",
@@ -1514,7 +1514,7 @@
    "films": [
     4
    ],
-   "img": null
+   "img": "gustavo"
   },
   {
    "id": "bianca",
@@ -1529,7 +1529,7 @@
    "films": [
     4
    ],
-   "img": null
+   "img": "bianca"
   },
   {
    "id": "kim",
@@ -1544,7 +1544,7 @@
    "films": [
     4
    ],
-   "img": null
+   "img": "kim"
   },
   {
    "id": "jenks",
@@ -1559,7 +1559,7 @@
    "films": [
     5
    ],
-   "img": null
+   "img": "jenks
   },
   {
    "id": "meyer",
@@ -1575,7 +1575,7 @@
     1,
     4
    ],
-   "img": null,
+   "img": "meyer",
    "note": "Автор книг появляется камео: в закусочной («Сумерки») и на свадьбе («Рассвет-1»)."
   }
  ],
