@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -273,12 +274,47 @@ function paintFilm(){
 
 var SIL='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.7 0 4.8-2.2 4.8-4.9S14.7 2.2 12 2.2 7.2 4.4 7.2 7.1 9.3 12 12 12zm0 2.3c-3.9 0-8 2-8 5v2.5h16v-2.5c0-3-4.1-5-8-5z"/></svg>';
 
+/* --- Надёжная загрузка картинок: перебор расширений и регистра имени ---
+   GitHub Pages чувствителен к регистру, а файлы могли быть сохранены
+   в .png/.jpeg/.webp — поэтому при 404 пробуем следующие варианты. */
+var IMG_EXTS=['.jpg','.jpeg','.png','.webp','.gif'];
+function imgVariants(name){
+  var out=[],i,j;
+  var names=[name];
+  if(name!==name.toLowerCase()) names.push(name.toLowerCase());
+  else names.push(name.charAt(0).toUpperCase()+name.slice(1));
+  for(i=0;i<names.length;i++)
+    for(j=0;j<IMG_EXTS.length;j++)
+      out.push('images/'+names[i]+IMG_EXTS[j]);
+  return out;
+}
+function imgFallback(el){
+  var v=JSON.parse(el.getAttribute('data-v')||'[]');
+  var i=parseInt(el.getAttribute('data-i')||'-1',10)+1;
+  el.setAttribute('data-i',String(i));
+  if(i<v.length){ el.src=v[i]; return; }
+  /* все варианты исчерпаны — показываем заглушку */
+  var ph=document.createElement('span');
+  if(el.classList.contains('tph')){
+    ph.className='tph none'; ph.textContent='—';
+  }else{
+    ph.className='noimg'; ph.innerHTML=SIL+'<span>кадр не найден</span>';
+  }
+  if(el.parentNode) el.parentNode.replaceChild(ph,el);
+}
+function imgTag(name,cls,alt){
+  var v=imgVariants(name);
+  return '<img'+(cls?' class="'+cls+'"':'')+' loading="lazy" src="'+v[0]+
+    '" data-v=\''+JSON.stringify(v).replace(/'/g,"&#39;")+'\' data-i="0"'+
+    ' onerror="imgFallback(this)" alt="'+alt+'">';
+}
+
 function filmChipsHtml(f){return '<span class="films">'+f.map(function(k){return '<span class="fchip">'+k+'</span>'}).join("")+'</span>'}
 
 function cardHtml(c){
   var ph;
   if(c.img){
-    ph='<img loading="lazy" src="images/'+c.img+'.jpg" alt="'+esc(c.ru)+'">'+filmChipsHtml(c.films);
+    ph=imgTag(c.img,'',esc(c.ru))+filmChipsHtml(c.films);
   }else{
     ph='<div class="noimg">'+SIL+'<span>кадр не найден</span></div>'+filmChipsHtml(c.films);
   }
@@ -297,7 +333,7 @@ function cardHtml(c){
     '</div></article>';
 }
 function rowHtml(c){
-  var ph=c.img?'<img class="tph" loading="lazy" src="images/'+c.img+'.jpg" alt="">':'<span class="tph none">—</span>';
+  var ph=c.img?imgTag(c.img,'tph',''):'<span class="tph none">—</span>';
   return '<tr>'+
     '<td>'+ph+'</td>'+
     '<td><b>'+esc(c.ru)+'</b><br><span style="color:var(--dim);font-size:11.5px">'+esc(c.en)+'</span></td>'+
