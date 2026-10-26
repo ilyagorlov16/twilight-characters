@@ -1,0 +1,809 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Сумерки · Тренажёр персонажей — фото + 4 варианта</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌙</text></svg>">
+<style>
+:root{
+  --bg:#07060b; --bg2:#0d0a14; --panel:#141020; --panel2:#1a1528; --panel3:#221b33;
+  --line:#2a2140; --line2:#3a2d58;
+  --txt:#ece7f6; --mut:#a294bd; --dim:#6f6288;
+  --gold:#d8b45e; --vamp:#9a6cf0; --newb:#e05fa8; --nomad:#39b8a8;
+  --wolf:#e07a3f; --hum:#5b9bd8; --hyb:#4ec98a;
+  --ok:#4ec98a; --bad:#e05f6e;
+  --shadow:0 10px 28px rgba(0,0,0,.5);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;color:var(--txt);font-size:15px;line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:
+   radial-gradient(1100px 600px at 10% -10%, rgba(154,108,240,.16), transparent 60%),
+   radial-gradient(900px 520px at 95% 0%, rgba(57,184,168,.10), transparent 58%),
+   radial-gradient(1000px 700px at 50% 110%, rgba(224,122,63,.10), transparent 60%),
+   linear-gradient(180deg,var(--bg2),var(--bg) 45%);
+  background-attachment:fixed;min-height:100vh}
+a{color:var(--gold)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 18px}
+button{font-family:inherit}
+
+/* ---------- шапка ---------- */
+header{padding:26px 0 16px;border-bottom:1px solid var(--line);text-align:center}
+.eyebrow{display:inline-flex;gap:8px;align-items:center;font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--gold);border:1px solid var(--line2);background:var(--panel);padding:5px 13px;border-radius:999px;font-weight:700}
+h1{font-size:clamp(24px,4vw,38px);margin:12px 0 6px;letter-spacing:-.02em;line-height:1.12}
+h1 .g{background:linear-gradient(100deg,#fff,#d9c6ff 40%,#9fd8ff 70%,#ffd9a0);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{color:var(--mut);max-width:70ch;margin:0 auto;font-size:14px}
+.hdr-links{margin-top:12px;font-size:13px}
+.hdr-links a{text-decoration:none;border:1px solid var(--line2);background:var(--panel);padding:6px 14px;border-radius:999px;margin:0 4px;display:inline-block}
+.hdr-links a:hover{border-color:var(--gold)}
+
+main{padding:26px 0 40px}
+.scr{display:none}
+.scr.on{display:block;animation:fadeIn .25s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* ---------- панели ---------- */
+.panel{background:linear-gradient(170deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:var(--shadow)}
+.panel h2{font-size:18px;margin:0 0 14px;letter-spacing:-.01em}
+.panel h2 .ic{margin-right:8px}
+
+/* ---------- меню ---------- */
+.summary{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 16px;min-width:110px;flex:1}
+.stat b{display:block;font-size:22px;line-height:1.15}
+.stat span{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-bottom:16px}
+.field label{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin-bottom:5px;font-weight:700}
+select.sel{width:100%;height:40px;border-radius:10px;border:1px solid var(--line);background:var(--panel3);color:var(--txt);
+  font-size:13.5px;padding:0 10px;outline:none;cursor:pointer}
+select.sel:focus{border-color:var(--vamp);box-shadow:0 0 0 3px rgba(154,108,240,.16)}
+.diff{display:flex;gap:8px}
+.diff .chip{flex:1;text-align:center}
+.chip{padding:8px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel3);color:var(--mut);
+  font-size:12.5px;font-weight:650;cursor:pointer;transition:.15s;user-select:none}
+.chip:hover{color:var(--txt);border-color:var(--line2)}
+.chip.on{background:var(--gold);color:#141020;border-color:transparent;font-weight:750}
+.tgl{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;color:var(--mut);cursor:pointer;user-select:none;margin:2px 0 14px}
+.tgl input{accent-color:var(--vamp);width:16px;height:16px}
+.poolnote{font-size:13px;color:var(--mut);margin-bottom:16px}
+.poolnote b{color:var(--gold);font-size:15px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:none;border-radius:12px;cursor:pointer;
+  font-weight:750;transition:.15s;font-size:15px}
+.btn-main{width:100%;padding:15px;font-size:17px;color:#120e1c;
+  background:linear-gradient(100deg,#e9cd7e,var(--gold) 55%,#c99f45);box-shadow:0 6px 20px rgba(216,180,94,.25)}
+.btn-main:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(216,180,94,.35)}
+.btn-ghost{padding:11px 18px;background:var(--panel3);border:1px solid var(--line2);color:var(--txt);font-size:13.5px}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.btn-row .btn-ghost{flex:1}
+.hint{font-size:12px;color:var(--dim);margin-top:14px;text-align:center}
+kbd{background:var(--panel3);border:1px solid var(--line2);border-bottom-width:2px;border-radius:5px;padding:1px 6px;font-size:11px;font-family:inherit;color:var(--mut)}
+
+/* ---------- викторина ---------- */
+.qbar{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.qnum{font-size:13px;color:var(--mut);white-space:nowrap}
+.qnum b{color:var(--txt);font-size:15px}
+.pline{flex:1;min-width:80px;height:6px;border-radius:99px;background:var(--panel3);overflow:hidden}
+.pline i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--vamp),var(--gold));transition:width .3s}
+.qscore{display:flex;gap:10px;font-size:13px;font-weight:700;white-space:nowrap}
+.qscore .ok{color:var(--ok)} .qscore .bad{color:var(--bad)} .qscore .fire{color:var(--gold)}
+.qexit{background:none;border:1px solid var(--line2);color:var(--mut);border-radius:9px;width:34px;height:34px;cursor:pointer;font-size:15px;line-height:1}
+.qexit:hover{color:var(--bad);border-color:var(--bad)}
+.qbox{display:grid;grid-template-columns:minmax(260px,380px) 1fr;gap:22px;align-items:start}
+@media(max-width:840px){.qbox{grid-template-columns:1fr}}
+.qphoto{position:relative;border-radius:16px;overflow:hidden;background:#0b0813;border:1px solid var(--line);
+  aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;max-height:70vh}
+.qphoto img{width:100%;height:100%;object-fit:contain;display:block;animation:fadeIn .3s ease}
+.qphoto .noimg{position:absolute;inset:0;display:flex;flex-direction:column;gap:8px;align-items:center;justify-content:center;color:var(--dim);font-size:12px}
+.qphoto .noimg svg{width:44px;height:44px;fill:currentColor;opacity:.5}
+.qphoto .racebadge{position:absolute;left:10px;top:10px;font-size:11px;font-weight:750;padding:4px 10px;border-radius:999px;
+  background:rgba(10,8,16,.82);border:1px solid var(--rc,var(--line2));color:var(--rc,var(--mut));backdrop-filter:blur(4px);display:none}
+.qphoto.answered .racebadge{display:block}
+@media(max-width:840px){.qphoto{max-height:44vh;margin:0 auto;width:100%;max-width:380px}}
+.qright{display:flex;flex-direction:column;gap:10px}
+.qask{font-size:15px;color:var(--mut);margin:0 0 4px}
+.opt{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:13px 16px;border-radius:12px;cursor:pointer;
+  border:1px solid var(--line);background:var(--panel);color:var(--txt);font-size:15.5px;font-weight:600;transition:.13s;user-select:none}
+.opt .k{flex:none;width:26px;height:26px;border-radius:8px;background:var(--panel3);border:1px solid var(--line2);
+  display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--dim);font-weight:750}
+.opt:hover:not(:disabled){border-color:var(--vamp);background:var(--panel2);transform:translateX(3px)}
+.opt:disabled{cursor:default}
+.opt.correct{border-color:var(--ok);background:rgba(78,201,138,.12);animation:pop .3s ease}
+.opt.correct .k{background:var(--ok);border-color:var(--ok);color:#08130c}
+.opt.wrong{border-color:var(--bad);background:rgba(224,95,110,.12);animation:shake .35s ease}
+.opt.wrong .k{background:var(--bad);border-color:var(--bad);color:#160a0b}
+.opt.miss{opacity:.4}
+@keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.025)}100%{transform:scale(1)}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}50%{transform:translateX(5px)}75%{transform:translateX(-3px)}}
+.verdict{font-size:15px;font-weight:750;margin-top:2px;min-height:22px}
+.verdict.ok{color:var(--ok)} .verdict.bad{color:var(--bad)}
+.dossier{border:1px solid var(--line);border-radius:12px;background:var(--panel2);padding:14px 16px;margin-top:6px;display:none;animation:fadeIn .25s ease}
+.dossier.on{display:block}
+.dossier .dn{font-size:17px;font-weight:800;letter-spacing:-.01em}
+.dossier .den{font-size:12.5px;color:var(--dim);margin-bottom:8px}
+.dossier .row{font-size:13.5px;color:var(--mut);margin:3px 0}
+.dossier .row b{color:var(--txt);font-weight:650}
+.racepill{display:inline-block;font-size:11px;font-weight:750;padding:2px 9px;border-radius:999px;border:1px solid var(--rc);color:var(--rc);margin-left:6px;vertical-align:1px}
+.fchip{display:inline-block;font-size:11px;font-weight:700;padding:2px 7px;border-radius:6px;background:var(--panel3);border:1px solid var(--line);color:var(--gold);margin:0 3px 3px 0}
+.dnote{font-size:12.5px;color:var(--dim);font-style:italic;margin-top:8px;border-top:1px dashed var(--line);padding-top:8px}
+.btn-next{margin-top:10px;padding:13px 22px;background:linear-gradient(100deg,#b495f5,var(--vamp));color:#0e0a17;font-size:15px;display:none}
+.btn-next.on{display:inline-flex}
+.btn-next:hover{transform:translateY(-2px)}
+
+/* ---------- результаты ---------- */
+.res-head{text-align:center;padding:10px 0 18px}
+.res-pct{font-size:clamp(52px,10vw,84px);font-weight:850;line-height:1;letter-spacing:-.03em}
+.res-pct.good{color:var(--ok)} .res-pct.mid{color:var(--gold)} .res-pct.low{color:var(--bad)}
+.res-msg{font-size:17px;color:var(--mut);margin-top:8px}
+.res-stats{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:18px 0}
+.res-wrong h3{font-size:15px;margin:20px 0 10px;color:var(--mut)}
+.wgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.wcard{background:var(--panel2);border:1px solid var(--line);border-radius:12px;overflow:hidden;text-align:center}
+.wcard .wp{aspect-ratio:3/4;background:#0b0813;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.wcard .wp img{width:100%;height:100%;object-fit:contain}
+.wcard .wn{font-size:12.5px;font-weight:700;padding:7px 8px 2px}
+.wcard .wa{font-size:11px;color:var(--dim);padding:0 8px 8px}
+
+/* ---------- статистика ---------- */
+.st-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.strow{display:flex;align-items:center;gap:12px;padding:8px 10px;border-radius:10px;border:1px solid transparent}
+.strow:nth-child(odd){background:rgba(255,255,255,.015)}
+.strow .sp{flex:none;width:40px;height:52px;border-radius:7px;background:#0b0813;border:1px solid var(--line);overflow:hidden;display:flex;align-items:center;justify-content:center}
+.strow .sp img{width:100%;height:100%;object-fit:contain}
+.strow .sn{flex:1;min-width:120px}
+.strow .sn b{display:block;font-size:13.5px}
+.strow .sn span{font-size:11px;color:var(--dim)}
+.strow .sb{flex:none;width:110px}
+.mbar{height:6px;border-radius:99px;background:var(--panel3);overflow:hidden}
+.mbar i{display:block;height:100%;border-radius:99px}
+.strow .sc{flex:none;width:118px;text-align:right;font-size:11.5px;color:var(--mut)}
+.strow .sc b{font-size:12.5px}
+.mtag{display:inline-block;font-size:10px;font-weight:750;padding:2px 8px;border-radius:999px;letter-spacing:.04em}
+.mtag.new{background:var(--panel3);color:var(--dim)}
+.mtag.learning{background:rgba(216,180,94,.14);color:var(--gold)}
+.mtag.mastered{background:rgba(78,201,138,.14);color:var(--ok)}
+.mtag.bad{background:rgba(224,95,110,.14);color:var(--bad)}
+@media(max-width:640px){.strow .sb{display:none}.strow .sc{width:auto}}
+.danger{color:var(--bad)}
+footer{border-top:1px solid var(--line);padding:18px 0 26px;text-align:center;font-size:12px;color:var(--dim)}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <span class="eyebrow">🌙 Киносага «Сумерки» · 5 фильмов</span>
+  <h1>Тренажёр персонажей: <span class="g">кто на фото?</span></h1>
+  <p class="lead">Вам показывается кадр из саги — выберите имя персонажа из четырёх вариантов.
+     Прогресс сохраняется в браузере: отрабатывайте тех, в ком ошибаетесь.</p>
+  <div class="hdr-links">
+    <a href="index.html">📖 Досье персонажей</a>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ ЭКРАН: МЕНЮ ============ -->
+<section id="scr-menu" class="scr on">
+  <div class="summary" id="menu-summary"></div>
+
+  <div class="panel">
+    <h2><span class="ic">⚙️</span>Настройка тренировки</h2>
+    <div class="mgrid">
+      <div class="field"><label>Фильм</label><select id="sel-film" class="sel"></select></div>
+      <div class="field"><label>Раса</label><select id="sel-race" class="sel"></select></div>
+      <div class="field"><label>Клан / группа</label><select id="sel-group" class="sel"></select></div>
+      <div class="field"><label>Вопросов в раунде</label><select id="sel-count" class="sel">
+        <option value="10">10</option><option value="20" selected>20</option>
+        <option value="40">40</option><option value="0">Весь пул (каждый раз по одному)</option>
+      </select></div>
+    </div>
+    <div class="field" style="margin-bottom:12px"><label>Сложность вариантов ответа</label>
+      <div class="diff" id="diff-row">
+        <span class="chip" data-d="easy">Лёгкая · кто угодно</span>
+        <span class="chip on" data-d="mid">Средняя · той же расы</span>
+        <span class="chip" data-d="hard">Сложная · того же клана</span>
+      </div>
+    </div>
+    <label class="tgl"><input type="checkbox" id="tgl-wrong"> Спрашивать только тех, в ком я ошибался <span id="wrong-hint" style="color:var(--dim);font-size:12px"></span></label>
+    <div class="poolnote">Персонажей в пуле: <b id="pool-count">95</b></div>
+    <button class="btn btn-main" id="btn-start">🎬 Начать тренировку</button>
+    <div class="btn-row">
+      <button class="btn btn-ghost" id="btn-stats">📊 Моя статистика</button>
+      <button class="btn btn-ghost" id="btn-catalog">📖 Открыть досье</button>
+    </div>
+    <p class="hint">Горячие клавиши в раунде: <kbd>1</kbd>–<kbd>4</kbd> — ответ, <kbd>Enter</kbd> — дальше, <kbd>Esc</kbd> — выйти в меню</p>
+  </div>
+</section>
+
+<!-- ============ ЭКРАН: ВОПРОС ============ -->
+<section id="scr-quiz" class="scr">
+  <div class="qbar">
+    <span class="qnum">Вопрос <b id="q-idx">1</b> / <span id="q-total">20</span></span>
+    <span class="pline"><i id="q-prog" style="width:0%"></i></span>
+    <span class="qscore"><span class="ok">✓ <span id="q-ok">0</span></span> <span class="bad">✗ <span id="q-bad">0</span></span> <span class="fire" id="q-fire">🔥 0</span></span>
+    <button class="qexit" id="btn-exit" title="Выйти в меню (Esc)">✕</button>
+  </div>
+  <div class="qbox">
+    <div class="qphoto" id="q-photo"></div>
+    <div class="qright">
+      <p class="qask">Кто этот персонаж?</p>
+      <div id="q-opts"></div>
+      <div class="verdict" id="q-verdict"></div>
+      <div class="dossier" id="q-dossier"></div>
+      <button class="btn btn-next" id="btn-next">Дальше →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ЭКРАН: РЕЗУЛЬТАТЫ ============ -->
+<section id="scr-result" class="scr">
+  <div class="panel">
+    <div class="res-head">
+      <div class="res-pct" id="res-pct">0%</div>
+      <div class="res-msg" id="res-msg"></div>
+    </div>
+    <div class="res-stats" id="res-stats"></div>
+    <div class="res-wrong" id="res-wrong-box"></div>
+    <div class="btn-row">
+      <button class="btn btn-ghost" id="btn-retry-wrong"></button>
+      <button class="btn btn-ghost" id="btn-again">🔁 Ещё раунд</button>
+      <button class="btn btn-ghost" id="btn-tomenu">🏠 В меню</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ЭКРАН: СТАТИСТИКА ============ -->
+<section id="scr-stats" class="scr">
+  <div class="panel">
+    <h2><span class="ic">📊</span>Моя статистика по персонажам</h2>
+    <div class="summary" id="st-summary"></div>
+    <div class="st-chips" id="st-filters">
+      <span class="chip on" data-f="all">Все</span>
+      <span class="chip" data-f="bad">С ошибками</span>
+      <span class="chip" data-f="learning">В процессе</span>
+      <span class="chip" data-f="mastered">Освоены</span>
+      <span class="chip" data-f="new">Не начаты</span>
+    </div>
+    <div id="st-list"></div>
+    <div class="btn-row">
+      <button class="btn btn-ghost danger" id="btn-reset">🗑 Сбросить статистику</button>
+      <button class="btn btn-ghost" id="btn-st-back">← В меню</button>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>Тренажёр работает офлайн · данные и кадры — из проекта «Досье персонажей киросаги „Сумерки"» · 95 персонажей, 5 фильмов</footer>
+</div>
+
+<script id="data" type="application/json">{"films":{"1":"Сумерки (2008)","2":"Новолуние (2009)","3":"Затмение (2010)","4":"Рассвет: Часть 1 (2011)","5":"Рассвет: Часть 2 (2012)"},"chars":[{"id":"bella","ru":"Белла Свон → Белла Каллен","en":"Isabella «Bella» Swan / Cullen","race":"Человек → Вампир","clan":"Клан Калленов (до брака — Свон, люди)","age":"17–18 лет как человек; 18–19 как вампир","birth":"13 сентября 1987","conf":"канон","actor":"Кристен Стюарт","films":[1,2,3,4,5],"img":"bella","note":"Обращена в вампира в «Рассвет: Часть 1» после рождения Ренессми."},{"id":"edward","ru":"Эдвард Каллен","en":"Edward Cullen","race":"Вампир","clan":"Клан Калленов","age":"17 физически; 104→111 лет хронологически","birth":"20 июня 1901 (обращён в 1918, в 17 лет)","conf":"канон","actor":"Роберт Паттинсон","films":[1,2,3,4,5],"img":"edward"},{"id":"carlisle","ru":"Карлайл Каллен","en":"Carlisle Cullen","race":"Вампир","clan":"Клан Калленов (основатель)","age":"23 физически; ≈365+ лет","birth":"≈1640-е, Лондон (обращён в 1663, в 23 года)","conf":"≈","actor":"Питер Фачинелли","films":[1,2,3,4,5],"img":"carlisle"},{"id":"esme","ru":"Эсми Каллен","en":"Esme Cullen","race":"Вампир","clan":"Клан Калленов","age":"26 физически","birth":"1895 (обращена в 1921, в 26 лет)","conf":"канон","actor":"Элизабет Ризер","films":[1,2,3,4,5],"img":"esme"},{"id":"alice","ru":"Элис Каллен","en":"Alice Cullen","race":"Вампир","clan":"Клан Калленов","age":"19 физически","birth":"≈1901, Билокси, Миссисипи (обращена ≈1920)","conf":"≈","actor":"Эшли Грин","films":[1,2,3,4,5],"img":"alice","note":"Дар — предвидение будущего."},{"id":"emmett","ru":"Эмметт Каллен","en":"Emmett Cullen","race":"Вампир","clan":"Клан Калленов","age":"20 физически","birth":"1915 (обращён в 1935, в 20 лет)","conf":"канон","actor":"Келлан Латс","films":[1,2,3,4,5],"img":"emmett"},{"id":"rosalie","ru":"Розали Хейл","en":"Rosalie Hale","race":"Вампир","clan":"Клан Калленов","age":"18 физически","birth":"1915 (обращена в 1933, в 18 лет)","conf":"канон","actor":"Никки Рид","films":[1,2,3,4,5],"img":"rosalie"},{"id":"jasper","ru":"Джаспер Хейл","en":"Jasper Hale","race":"Вампир","clan":"Клан Калленов (ранее — армия Конфедерации, клан Марии)","age":"19–20 физически","birth":"1844, Техас (обращён в 1863, в 19 лет)","conf":"канон","actor":"Джексон Рэтбоун","films":[1,2,3,4,5],"img":"jasper","note":"Дар — управление эмоциями окружающих."},{"id":"renesmee","ru":"Ренессми Каллен","en":"Renesmee Cullen","race":"Гибрид","clan":"Клан Калленов","age":"хронологически <1 года; физически растёт ускоренно (к финалу ≈6–7 лет на вид)","birth":"сентябрь 2006","conf":"канон","actor":"Маккензи Фой","films":[4,5],"img":"renesmee","note":"В «Рассвет-1» младенец — CGI/аниматроника; Ренессми-ребёнка играют Маккензи Фой (и Кристин Бёрк и др. в эпизодах)."},{"id":"aro","ru":"Аро","en":"Aro","race":"Вампир","clan":"Вольтури (лидер)","age":"≈3 300+ лет; выглядит на ~45","birth":"≈1340 г. до н.э., Греция (обращён в ~25 лет)","conf":"канон","actor":"Майкл Шин","films":[2,4,5],"img":"aro","note":"Дар — чтение всех мыслей при прикосновении."},{"id":"caius","ru":"Кай","en":"Caius","race":"Вампир","clan":"Вольтури (лидер)","age":"≈3 400+ лет; выглядит на ~45","birth":"≈XV–XIV вв. до н.э. (обращён на ~50-м году)","conf":"≈","actor":"Джейми Кэмпбелл Бауэр","films":[2,4,5],"img":"caius"},{"id":"marcus","ru":"Марк","en":"Marcus","race":"Вампир","clan":"Вольтури (лидер)","age":"≈3 300+ лет; выглядит на ~40","birth":"≈XIV в. до н.э. (обращён в 19 лет)","conf":"канон","actor":"Кристофер Хейердал","films":[2,4,5],"img":"marcus","note":"Дар — видение эмоциональных связей."},{"id":"jane","ru":"Джейн","en":"Jane","race":"Вампир","clan":"Вольтури (гвардия)","age":"≈800 лет; выглядит на ~12–14","birth":"≈XIII век, Англия (обращена ребёнком/подростком)","conf":"≈","actor":"Дакота Фаннинг","films":[2,3,5],"img":"jane","note":"Дар — иллюзия боли."},{"id":"alec","ru":"Алек","en":"Alec","race":"Вампир","clan":"Вольтури (гвардия)","age":"≈800 лет; выглядит на ~14","birth":"≈XIII век, Англия (близнец Джейн, обращён подростком)","conf":"≈","actor":"Кэмерон Брайт","films":[2,3,5],"img":"alec","note":"Дар — полное отключение чувств."},{"id":"demetri","ru":"Деметрий","en":"Demetri","race":"Вампир","clan":"Вольтури (гвардия)","age":"неизвестен; выглядит на ~30","birth":"не указан в каноне","conf":"≈","actor":"Чарли Бьюли","films":[2,3,4,5],"img":"demetri","note":"Дар — безошибочное выслеживание."},{"id":"felix","ru":"Феликс","en":"Felix","race":"Вампир","clan":"Вольтури (гвардия)","age":"неизвестен; выглядит на ~35","birth":"не указан в каноне","conf":"≈","actor":"Дэниэл Кадмор","films":[2,3,4,5],"img":"felix"},{"id":"heidi","ru":"Хайди","en":"Heidi","race":"Вампир","clan":"Вольтури (приманка)","age":"неизвестен; выглядит на ~25","birth":"не указан в каноне","conf":"≈","actor":"Нут Сиар","films":[2],"img":"heidi"},{"id":"santiago","ru":"Сантьяго","en":"Santiago","race":"Вампир","clan":"Вольтури (гвардия)","age":"неизвестен; выглядит на ~30","birth":"не указан в каноне","conf":"≈","actor":"Латиф Кроудер","films":[5],"img":"santiago"},{"id":"tanya","ru":"Таня","en":"Tanya","race":"Вампир","clan":"Клан Денали (Аляска)","age":"выглядит на ~28","birth":"не указан в каноне","conf":"≈","actor":"МиАнна Бёринг","films":[4,5],"img":"tanya"},{"id":"kate","ru":"Кейт","en":"Kate","race":"Вампир","clan":"Клан Денали","age":"выглядит на ~28","birth":"не указан в каноне","conf":"≈","actor":"Кейси ЛаБоу","films":[4,5],"img":"kate","note":"Дар — электрический заряд на коже."},{"id":"irina","ru":"Ирина","en":"Irina","race":"Вампир","clan":"Клан Денали","age":"выглядит на ~30","birth":"не указан в каноне","conf":"≈","actor":"Мэгги Грейс","films":[4,5],"img":"irina","note":"Именно она доносит Вольтури о «бессмертном ребёнке»."},{"id":"eleazar","ru":"Элеазар","en":"Eleazar","race":"Вампир","clan":"Клан Денали (ранее — Вольтури)","age":"выглядит на ~40","birth":"≈XVIII век","conf":"≈","actor":"Кристиан Камарго","films":[4,5],"img":"eleazar","note":"Дар — распознавание способностей."},{"id":"carmen","ru":"Кармен","en":"Carmen","race":"Вампир","clan":"Клан Денали","age":"выглядит на ~30","birth":"не указан в каноне","conf":"≈","actor":"Миа Маэстро","films":[4,5],"img":"carmen"},{"id":"laurent","ru":"Лоран","en":"Laurent","race":"Вампир","clan":"Клан Денали (ранее — ковен Джеймса)","age":"выглядит на ~30","birth":"не указан в каноне","conf":"≈","actor":"Эди Гатеги","films":[1,2],"img":"laurent","note":"Погибает в «Новолунии» от стаи оборотней."},{"id":"vasilii","ru":"Василий","en":"Vasilii","race":"Вампир","clan":"Клан Денали (казнён Вольтури; флэшбек)","age":"выглядит на ~20","birth":"не указан в каноне","conf":"≈","actor":"Билли Вагенселлер","films":[4,5],"img":"vasilii"},{"id":"sasha","ru":"Саша","en":"Sasha","race":"Вампир","clan":"Клан Денали (казнена Вольтури; флэшбек)","age":"выглядит на ~30","birth":"не указан в каноне","conf":"≈","actor":"Андреа Пауэлл","films":[5],"img":"sasha","note":"Создала «бессмертного ребёнка» — за это клан был наказан."},{"id":"zafrina","ru":"Зафрина","en":"Zafrina","race":"Вампир","clan":"Амазонский клан","age":"выглядит на ~30","birth":"не указан в каноне","conf":"≈","actor":"Джуди Шекони","films":[5],"img":"zafrina","note":"Дар — создание иллюзий."},{"id":"senna","ru":"Сенна","en":"Senna","race":"Вампир","clan":"Амазонский клан","age":"выглядит на ~30","birth":"не указан в каноне","conf":"≈","actor":"Трейси Хеггинс","films":[5],"img":"senna"},{"id":"benjamin","ru":"Бенджамин","en":"Benjamin","race":"Вампир","clan":"Египетский клан","age":"выглядит на ~25","birth":"не указан в каноне (древний)","conf":"≈","actor":"Рами Малек","films":[5],"img":"benjamin","note":"Дар — управление стихиями."},{"id":"tia","ru":"Тиа","en":"Tia","race":"Вампир","clan":"Египетский клан","age":"выглядит на ~25","birth":"не указан в каноне","conf":"≈","actor":"Анджела Сарафян","films":[5],"img":"tia"},{"id":"amun","ru":"Амун","en":"Amun","race":"Вампир","clan":"Египетский клан","age":"выглядит на ~40","birth":"не указан в каноне (древний)","conf":"≈","actor":"Омар Метуолли","films":[5],"img":"amun"},{"id":"kebi","ru":"Кеби","en":"Kebi","race":"Вампир","clan":"Египетский клан","age":"выглядит на ~30","birth":"не указан в каноне","conf":"≈","actor":"Андреа Гэбриел","films":[5],"img":"kebi"},{"id":"henri","ru":"Анри","en":"Henri","race":"Вампир","clan":"Французский клан","age":"выглядит на ~30","birth":"не указан в каноне","conf":"≈","actor":"Амаду Ли","films":[5],"img":"henri"},{"id":"yvette","ru":"Иветта","en":"Yvette","race":"Вампир","clan":"Французский клан","age":"выглядит на ~25","birth":"не указан в каноне","conf":"≈","actor":"Джанелль Фрёлих","films":[5],"img":"yvette"},{"id":"siobhan","ru":"Шивон","en":"Siobhan","race":"Вампир","clan":"Ирландский клан","age":"выглядит на ~30","birth":"не указан в каноне","conf":"≈","actor":"Лиза Ховард","films":[5],"img":"siobhan"},{"id":"liam","ru":"Лиам","en":"Liam","race":"Вампир","clan":"Ирландский клан","age":"выглядит на ~30","birth":"не указан в каноне","conf":"≈","actor":"Патрик Бреннан","films":[5],"img":"liam"},{"id":"maggie_i","ru":"Мэгги","en":"Maggie","race":"Вампир","clan":"Ирландский клан","age":"выглядит на ~25","birth":"не указан в каноне","conf":"≈","actor":"Марлэн Барнс","films":[5],"img":"maggie_i","note":"Дар — распознавание правды."},{"id":"stefan","ru":"Штефан","en":"Stefan","race":"Вампир","clan":"Румынский клан","age":"выглядит на ~45","birth":"не указан в каноне (древний)","conf":"≈","actor":"Гури Вайнберг","films":[5],"img":"stefan"},{"id":"vladimir","ru":"Владимир","en":"Vladimir","race":"Вампир","clan":"Румынский клан","age":"выглядит на ~45","birth":"не указан в каноне (древний)","conf":"≈","actor":"Ноэл Фишер","films":[5],"img":"vladimir"},{"id":"victoria","ru":"Виктория","en":"Victoria","race":"Вампир (кочевник)","clan":"Ковен Джеймса → одиночка-кочевник","age":"выглядит на ~25","birth":"не указан в каноне","conf":"≈","actor":"Рашель ЛеФевр («Сумерки», «Новолуние») → Брайс Даллас Ховард («Затмение»)","films":[1,2,3],"img":"victoria","note":"РЕКАСТ: в 1–2 фильмах ЛеФевр, в 3-м — Ховард; в «Рассвет-1» — архивные кадры ЛеФевр."},{"id":"james","ru":"Джеймс","en":"James","race":"Вампир (кочевник)","clan":"Ковен Джеймса (трекер)","age":"выглядит на ~30","birth":"не указан в каноне","conf":"≈","actor":"Кэм Жиганде","films":[1],"img":"james","note":"Главный антагонист «Сумерек»; убит Калленами."},{"id":"garrett","ru":"Гарретт","en":"Garrett","race":"Вампир (кочевник)","clan":"Американские кочевники","age":"выглядит на ~35","birth":"не указан в каноне","conf":"≈","actor":"Ли Пейс","films":[5],"img":"garrett"},{"id":"mary","ru":"Мэри","en":"Mary","race":"Вампир (кочевник)","clan":"Американские кочевники","age":"выглядит на ~30","birth":"не указан в каноне","conf":"≈","actor":"Тони Тракс","films":[5],"img":"mary"},{"id":"peter","ru":"Питер","en":"Peter","race":"Вампир (кочевник)","clan":"Американские кочевники (ранее — клан Марии)","age":"выглядит на ~35","birth":"не указан в каноне","conf":"≈","actor":"Эрик Одом","films":[5],"img":"peter"},{"id":"charlotte","ru":"Шарлотта","en":"Charlotte","race":"Вампир (кочевник)","clan":"Американские кочевники","age":"выглядит на ~25","birth":"не указан в каноне","conf":"≈","actor":"Валори Карри","films":[5],"img":"charlotte"},{"id":"randall","ru":"Рэндалл","en":"Randall","race":"Вампир (кочевник)","clan":"Американские кочевники","age":"выглядит на ~40","birth":"не указан в каноне","conf":"≈","actor":"Билл Тангради","films":[5],"img":"randall"},{"id":"alistair","ru":"Алистер","en":"Alistair","race":"Вампир (кочевник)","clan":"Европейские кочевники","age":"выглядит на ~50","birth":"не указан в каноне","conf":"≈","actor":"Джо Андерсон","films":[5],"img":"alistair","note":"Дар — выслеживание; старый знакомый Карлайла."},{"id":"riley","ru":"Райли Бирс","en":"Riley Biers","race":"Вампир (новорождённый)","clan":"Армия новорождённых (Сиэтл); создан Викторией","age":"≈25 (обращён незадолго до событий)","birth":"≈середина 1980-х","conf":"≈","actor":"Хавьер Сэмюэл","films":[3],"img":"riley"},{"id":"bree","ru":"Бри Таннер","en":"Bree Tanner","race":"Вампир (новорождённый)","clan":"Армия новорождённых (Сиэтл)","age":"≈15–16 (обращена незадолго до событий)","birth":"≈1994–95","conf":"≈","actor":"Джодель Ферланд","films":[3],"img":"bree","note":"Героиня спин-оффа «Короткая вторая жизнь Бри Таннер»."},{"id":"maria","ru":"Мария","en":"Maria","race":"Вампир","clan":"Клан Марии (южные войны, Монтеррей)","age":"выглядит на ~30","birth":"не указан в каноне (XIX век)","conf":"≈","actor":"Каталина Сандино Морено","films":[3],"img":"maria","note":"Создательница Джаспера."},{"id":"nette","ru":"Нетти","en":"Nettie","race":"Вампир (новорождённый)","clan":"Клан Марии / армия новорождённых","age":"выглядит на ~20","birth":"не указан в каноне","conf":"≈","actor":"Лиа Гибсон","films":[3],"img":"nette"},{"id":"lucy","ru":"Люси","en":"Lucy","race":"Вампир (новорождённый)","clan":"Клан Марии / армия новорождённых","age":"выглядит на ~20","birth":"не указан в каноне","conf":"≈","actor":"Кирстен Зин (Кирстен Праут)","films":[3],"img":"lucy"},{"id":"coldone","ru":"Холодный (камео)","en":"Cold One","race":"Вампир","clan":"— (камео)","age":"неизвестен","birth":"не указан","conf":"≈","actor":"Питер Мёрфи","films":[1],"img":"coldone","note":"Камео музыканта Питера Мёрфи в баре."},{"id":"vampiress","ru":"Прекрасная вампирша","en":"Beautiful Vampiress (Cold Woman)","race":"Вампир","clan":"— (эпизод)","age":"неизвестен","birth":"не указан","conf":"≈","actor":"Моник Гандертон","films":[1],"img":"vampiress"},{"id":"nahuel","ru":"Науэль","en":"Nahuel","race":"Гибрид","clan":"Южноамериканские гибриды","age":"≈150 лет; выглядит на ~30","birth":"≈1850-е","conf":"≈","actor":"Джей Ди Пардо","films":[5],"img":"nahuel","note":"Сын вампира и женщины-оборотня; доказательство безвредности Ренессми."},{"id":"jacob","ru":"Джейкоб Блэк","en":"Jacob Black","race":"Оборотень","clan":"Квилеутская стая (стая Улей → стая Блэка)","age":"15→16 лет","birth":"14 января 1990 (≈)","conf":"≈","actor":"Тейлор Лотнер","films":[1,2,3,4,5],"img":"jacob"},{"id":"sam","ru":"Сэм Ули","en":"Sam Uley","race":"Оборотень","clan":"Квилеутская стая (альфа)","age":"≈21–22","birth":"≈1987–88","conf":"≈","actor":"Соломон Тримбл («Сумерки», в титрах «друг Джейкоба») → Часке Спенсер (со «Новолуния»)","films":[1,2,3,4,5],"img":"sam","note":"РЕКАСТ: в 1-м фильме роль исполнил Соломон Тримбл."},{"id":"embry","ru":"Эмбри Колл","en":"Embry Call","race":"Оборотень","clan":"Квилеутская стая","age":"≈16","birth":"≈1993–94","conf":"≈","actor":"Крис Хаятт («Сумерки», без титров) → Кайова Гордон","films":[1,2,3,4,5],"img":"embry"},{"id":"quil","ru":"Квил Атеара V","en":"Quil Ateara V","race":"Оборотень","clan":"Квилеутская стая","age":"≈16","birth":"≈1993–94","conf":"≈","actor":"Тайсон Хаусман","films":[2,3,4,5],"img":"quil","note":"Импринтинг на двухлетнюю Клэр Янг."},{"id":"paul","ru":"Пол Лахот","en":"Paul Lahote","race":"Оборотень","clan":"Квилеутская стая","age":"≈16–17","birth":"≈1992–93","conf":"≈","actor":"Алекс Мераз","films":[2,3,4,5],"img":"paul"},{"id":"jared","ru":"Джаред Камерон","en":"Jared Cameron","race":"Оборотень","clan":"Квилеутская стая","age":"≈16–17","birth":"≈1992–93","conf":"≈","actor":"Бронсон Пеллетье","films":[2,3,4,5],"img":"jared"},{"id":"leah","ru":"Лия Клируотер","en":"Leah Clearwater","race":"Оборотень","clan":"Квилеутская стая → стая Блэка","age":"≈19–20","birth":"≈1989–90","conf":"≈","actor":"Джулия Джонс","films":[3,4,5],"img":"leah","note":"Единственная женщина-оборотень в стае."},{"id":"seth","ru":"Сет Клируотер","en":"Seth Clearwater","race":"Оборотень","clan":"Квилеутская стая → стая Блэка","age":"≈15–16","birth":"≈1994–95","conf":"≈","actor":"Бубу Стюарт","films":[3,4,5],"img":"seth"},{"id":"tahaaki","ru":"Таха Аки","en":"Taha Aki","race":"Оборотень","clan":"Древние квилютты (флэшбек-легенда)","age":"легендарный предок","birth":"не указан","conf":"≈","actor":"Байрон Чиф-Мун","films":[3],"img":"tahaaki"},{"id":"huilen","ru":"Хуилен","en":"Huilen","race":"Оборотень","clan":"Южноамериканское племя оборотней (флэшбек)","age":"неизвестен","birth":"не указан","conf":"≈","actor":"Мариса Куинн","films":[5],"img":"huilen","note":"Мать Науэля."},{"id":"charlie","ru":"Чарли Сван","en":"Charlie Swan","race":"Человек","clan":"Люди · Форкс (шеф полиции)","age":"≈40–42","birth":"≈1965 (точно не указан)","conf":"≈","actor":"Билли Бёрк","films":[1,2,3,4,5],"img":"charlie"},{"id":"billy","ru":"Билли Блэк","en":"Billy Black","race":"Человек","clan":"Люди · Ла-Пуш (совет старейшин квилюттов)","age":"≈55–60","birth":"≈1950-е","conf":"≈","actor":"Гил Бирмингем","films":[1,2,3,4],"img":"billy","note":"Отец Джейкоба; передвигается в инвалидном кресле."},{"id":"renee","ru":"Рене Двайер","en":"Renée Dwyer","race":"Человек","clan":"Люди · Джэксонвилл","age":"≈38–40","birth":"1968","conf":"канон","actor":"Сара Кларк","films":[1,3,4],"img":"renee"},{"id":"phil","ru":"Фил Двайер","en":"Phil Dwyer","race":"Человек","clan":"Люди","age":"≈40","birth":"≈1970-е","conf":"≈","actor":"Мэтт Бушелл («Сумерки») → Тай Олссон («Рассвет-1»)","films":[1,4],"img":"phil"},{"id":"sue","ru":"Сью Клируотер","en":"Sue Clearwater","race":"Человек","clan":"Люди · Ла-Пуш","age":"≈50","birth":"≈1960-е","conf":"≈","actor":"Алекс Райс","films":[3,4,5],"img":"sue"},{"id":"harry","ru":"Гарри Клируотер","en":"Harry Clearwater","race":"Человек","clan":"Люди · Ла-Пуш (совет старейшин)","age":"≈60","birth":"≈1940-50-е","conf":"≈","actor":"Грэм Грин","films":[2],"img":"harry","note":"Умирает от сердечного приступа в «Новолунии»."},{"id":"emily","ru":"Эмили Янг","en":"Emily Young","race":"Человек","clan":"Люди · Ла-Пуш","age":"≈25–30","birth":"≈1980-е","conf":"≈","actor":"Тинсел Кори","films":[2,3,4,5],"img":"emily","note":"Невеста Сэма; шрамы от его первого обращения."},{"id":"rachel","ru":"Рэйчел Блэк","en":"Rachel Black","race":"Человек","clan":"Люди · Ла-Пуш","age":"≈20","birth":"≈1989–90","conf":"≈","actor":"Таная Битти","films":[4],"img":"rachel"},{"id":"claire","ru":"Клэр Янг","en":"Claire Young","race":"Человек","clan":"Люди","age":"≈3","birth":"≈2007","conf":"≈","actor":"Сиенна Джозеф","films":[3],"img":"claire"},{"id":"jessica","ru":"Джессика Стэнли","en":"Jessica Stanley","race":"Человек","clan":"Люди · Форкс (школа)","age":"16–17","birth":"≈1987–88","conf":"≈","actor":"Анна Кендрик","films":[1,2,3,4],"img":"jessica","note":"В фильме объединены Джессика и Лорен из книги."},{"id":"mike","ru":"Майк Ньютон","en":"Mike Newton","race":"Человек","clan":"Люди · Форкс (школа)","age":"16–17","birth":"≈1987–88","conf":"≈","actor":"Майкл Уэлч","films":[1,2,3,4],"img":"mike"},{"id":"angela","ru":"Анджела Уэбер","en":"Angela Weber","race":"Человек","clan":"Люди · Форкс (школа)","age":"16–17","birth":"≈1987–88","conf":"≈","actor":"Кристиан Серратос","films":[1,2,3,4],"img":"angela"},{"id":"eric","ru":"Эрик Йорки","en":"Eric Yorkie","race":"Человек","clan":"Люди · Форкс (школа)","age":"16–17","birth":"≈1987–88","conf":"≈","actor":"Джастин Чон","films":[1,2,3,4],"img":"eric"},{"id":"tyler","ru":"Тайлер Кроули","en":"Tyler Crowley","race":"Человек","clan":"Люди · Форкс (школа)","age":"17","birth":"≈1987–88","conf":"≈","actor":"Грегори Тайри Бойс","films":[1],"img":"tyler"},{"id":"waylon","ru":"Уэйлон Фордж","en":"Waylon Forge","race":"Человек","clan":"Люди · Форкс","age":"≈45–50","birth":"≈1960-е","conf":"≈","actor":"Нед Беллами","films":[1],"img":"waylon","note":"Добавлен только в фильм; первая жертва трио Джеймса."},{"id":"molina","ru":"Мистер Молина","en":"Mr. Molina","race":"Человек","clan":"Люди · Форкс (учитель биологии)","age":"≈40","birth":"не указан","conf":"≈","actor":"Хосе Суньига","films":[1],"img":"molina"},{"id":"cope","ru":"Миссис Коуп","en":"Ms. Cope","race":"Человек","clan":"Люди · школа Форкса","age":"≈40","birth":"не указан","conf":"≈","actor":"Триш Иган","films":[1],"img":"cope"},{"id":"cora","ru":"Кора","en":"Cora","race":"Человек","clan":"Люди · Форкс","age":"не указан","birth":"не указан","conf":"≈","actor":"Аянна Беркшир","films":[1],"img":"cora"},{"id":"waitress","ru":"Официантка","en":"Waitress","race":"Человек","clan":"Люди · Порт-Анджелес","age":"не указан","birth":"не указан","conf":"≈","actor":"Кэти Пауэрс","films":[1],"img":"waitress"},{"id":"gianna","ru":"Джанна","en":"Gianna","race":"Человек","clan":"Люди · Вольтерра (приёмная Вольтури)","age":"≈25","birth":"не указан","conf":"≈","actor":"Жюстин Вашбергер","films":[2],"img":"gianna"},{"id":"royce","ru":"Ройс Кинг II","en":"Royce King II","race":"Человек","clan":"Люди · Мемфис (флэшбек 1930-х)","age":"≈25–30","birth":"≈1905–10","conf":"≈","actor":"Джек Хьюстон","films":[3],"img":"royce","note":"Жених Розали, предавший её."},{"id":"john","ru":"Джон","en":"John","race":"Человек","clan":"Люди (флэшбек Розали)","age":"не указан","birth":"не указан","conf":"≈","actor":"Бен Гелдрайх","films":[3],"img":"john"},{"id":"thirdwife","ru":"Третья жена","en":"Third Wife","race":"Человек","clan":"Люди (флэшбек-легенда квилюттов)","age":"не указан","birth":"не указан","conf":"≈","actor":"Мариэль Беланже","films":[3],"img":"thirdwife"},{"id":"vera","ru":"Вера","en":"Vera","race":"Человек","clan":"Люди (флэшбек)","age":"не указан","birth":"не указан","conf":"≈","actor":"Сабрина Фрэнк","films":[3],"img":"vera"},{"id":"kaure","ru":"Кауре","en":"Kaure","race":"Человек","clan":"Люди · Бразилия (прислуга)","age":"не указан","birth":"не указан","conf":"≈","actor":"Каролина Виргес","films":[4],"img":"kaure"},{"id":"gustavo","ru":"Густаво","en":"Gustavo","race":"Человек","clan":"Люди · Бразилия","age":"не указан","birth":"не указан","conf":"≈","actor":"Себастьян Лемос","films":[4],"img":"gustavo"},{"id":"bianca","ru":"Бьянка","en":"Bianca","race":"Человек","clan":"Люди","age":"не указан","birth":"не указан","conf":"≈","actor":"Али Фолкнер","films":[4],"img":"bianca"},{"id":"kim","ru":"Ким","en":"Kim","race":"Человек","clan":"Люди","age":"не указан","birth":"не указан","conf":"≈","actor":"Кейтлин Муни Фу","films":[4],"img":"kim"},{"id":"jenks","ru":"Джей Дженкс","en":"J. Jenks","race":"Человек","clan":"Люди (подделка документов)","age":"≈45–50","birth":"не указан","conf":"≈","actor":"Уэнделл Пирс","films":[5],"img":"jenks"},{"id":"meyer","ru":"Камео: посетительница / гостья","en":"Stephenie Meyer (cameo)","race":"Человек","clan":"— (камео автора)","age":"—","birth":"24 декабря 1973","conf":"канон","actor":"Стефани Майер","films":[1,4],"img":"meyer","note":"Автор книг появляется камео: в закусочной («Сумерки») и на свадьбе («Рассвет-1»)."}],"stats":{"total":95,"with_photo":95,"per_film":{"1":31,"2":33,"3":41,"4":44,"5":57}}}</script>
+<script>
+/* =====================================================================
+   ТРЕНАЖЁР ПЕРСОНАЖЕЙ «СУМЕРКИ» — фото + 4 варианта ответа
+   Архитектура та же, что у каталога index.html: данные встроены в страницу,
+   картинки грузятся из images/ с перебором регистра/расширений (работает
+   и с file://, и на GitHub Pages).
+   ===================================================================== */
+(function(){
+'use strict';
+
+var D=JSON.parse(document.getElementById('data').textContent);
+var CHARS=D.chars, FILMS=D.films;
+var byId={}; CHARS.forEach(function(c){byId[c.id]=c});
+
+/* ---------- мелкие утилиты ---------- */
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(m){
+  return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]})}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+function has(arr,v){return arr.indexOf(v)>-1}
+function $(id){return document.getElementById(id)}
+function pad2(n){return (n<10?'0':'')+n}
+
+/* отображаемое имя (для камео Стефани Майер берём понятную подпись) */
+function dname(c){return c.id==='meyer'?'Стефани Майер (камео)':c.ru}
+
+/* цвет расы — как в каталоге */
+function raceColor(r){
+  if(r==='Вампир (новорождённый)')return 'var(--newb)';
+  if(r==='Вампир (кочевник)')return 'var(--nomad)';
+  if(r.indexOf('Вампир')===0||r==='Человек → Вампир')return 'var(--vamp)';
+  if(r==='Оборотень')return 'var(--wolf)';
+  if(r==='Гибрид')return 'var(--hyb)';
+  return 'var(--hum)';
+}
+function filmsHtml(f){return f.map(function(k){return '<span class="fchip" title="'+esc(FILMS[k])+'">'+k+'</span>'}).join('')}
+
+/* группа клана — для фильтра и «сложных» вариантов ответа */
+var BUCKETS=[
+  [/Каллен/,'Клан Калленов'],[/Вольтури/,'Вольтури'],[/Денали/,'Клан Денали'],
+  [/Квилеут|квилют/,'Квилеутская стая'],[/Египет/,'Египетский клан'],[/Ирланд/,'Ирландский клан'],
+  [/Амазон/,'Амазонский клан'],[/Француз/,'Французский клан'],[/Румын/,'Румынский клан'],
+  [/Американские кочевники/,'Американские кочевники'],[/Европейские кочевники/,'Европейские кочевники'],
+  [/Джеймс/,'Ковен Джеймса'],[/Марии|новорожд/,'Армия Марии / новорождённые'],
+  [/Южноамериканские гибриды/,'Южноамериканские гибриды'],
+  [/Люди · Форкс/,'Люди · Форкс'],[/Люди · Ла-Пуш/,'Люди · Ла-Пуш'],[/^Люди/,'Прочие люди']
+];
+function bucket(c){
+  var cl=(c.clan||'').split('(')[0]; /* группа — по основной части клана, без уточнений в скобках */
+  for(var i=0;i<BUCKETS.length;i++) if(BUCKETS[i][0].test(cl)) return BUCKETS[i][1];
+  return 'Прочее';
+}
+function raceGroup(c){
+  var r=c.race;
+  if(r.indexOf('Вампир')===0||r==='Человек → Вампир')return 'vamp';
+  if(r==='Оборотень')return 'wolf';
+  if(r==='Гибрид')return 'hyb';
+  return 'human';
+}
+
+/* ---------- загрузка картинок (та же схема, что в каталоге) ---------- */
+var SIL='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.7 0 4.8-2.2 4.8-4.9S14.7 2.2 12 2.2 7.2 4.4 7.2 7.1 9.3 12 12 12zm0 2.3c-3.9 0-8 2-8 5v2.5h16v-2.5c0-3-4.1-5-8-5z"/></svg>';
+var IMG_EXTS=['.jpg','.jpeg','.png','.webp','.gif','.JPG','.JPEG','.PNG','.WEBP'];
+var IMG_MAP=null;
+function imgVariants(name){
+  var out=[],seen={},names=[name,String(name).toLowerCase(),
+    String(name).charAt(0).toUpperCase()+String(name).slice(1),String(name).toUpperCase()];
+  for(var i=0;i<names.length;i++){ if(seen[names[i]])continue; seen[names[i]]=1;
+    for(var j=0;j<IMG_EXTS.length;j++) out.push('images/'+names[i]+IMG_EXTS[j]); }
+  return out;
+}
+function imgExactSrc(name){
+  if(IMG_MAP&&Object.prototype.hasOwnProperty.call(IMG_MAP,String(name).toLowerCase()))
+    return 'images/'+IMG_MAP[String(name).toLowerCase()];
+  return null;
+}
+/* deadCb(id) вызывается, если все варианты файла исчерпаны (только у фото вопроса) */
+function imgTag(name,cls,alt,deadId){
+  var v=imgVariants(name), exact=imgExactSrc(name), src=exact||v[0];
+  if(exact) v=[exact].concat(v);
+  return '<img'+(cls?' class="'+cls+'"':'')+' src="'+src+'" draggable="false"'+
+    ' data-v=\''+JSON.stringify(v).replace(/'/g,"&#39;")+'\' data-i="0"'+
+    (deadId?' data-dead="'+esc(deadId)+'"':'')+
+    ' onerror="window.__qImgErr(this)" alt="'+esc(alt)+'">';
+}
+window.__qImgErr=function(el){
+  var v=JSON.parse(el.getAttribute('data-v')||'[]');
+  var i=parseInt(el.getAttribute('data-i')||'-1',10)+1;
+  el.setAttribute('data-i',String(i));
+  if(i<v.length){ el.src=v[i]; return; }
+  var dead=el.getAttribute('data-dead');
+  var ph=document.createElement('div'); ph.className='noimg';
+  ph.innerHTML=SIL+'<span>кадр не найден</span>';
+  if(el.parentNode) el.parentNode.replaceChild(ph,el);
+  if(dead&&window.__qImgDead) window.__qImgDead(dead);
+};
+function imgLoadMap(){ /* точные имена файлов через GitHub API (только на *.github.io) */
+  var m=location.hostname.match(/^(.+)\.github\.io$/i); if(!m)return;
+  var parts=location.pathname.split('/').filter(Boolean); if(!parts.length)return;
+  var url='https://api.github.com/repos/'+encodeURIComponent(m[1])+'/'+encodeURIComponent(parts[0])+'/contents/images';
+  try{
+    fetch(url,{headers:{'Accept':'application/vnd.github+json'}})
+      .then(function(r){return r.ok?r.json():null})
+      .then(function(list){ if(!list||!list.length)return;
+        IMG_MAP={};
+        list.forEach(function(f){ if(f.type!=='file')return;
+          var b=f.name,i=b.lastIndexOf('.');
+          IMG_MAP[(i>0?b.slice(0,i):b).toLowerCase()]=b; });
+      }).catch(function(){});
+  }catch(e){}
+}
+/* фоновый предзагруз кадра следующего вопроса */
+function preload(name){
+  if(!name)return;
+  var v=imgVariants(name), exact=imgExactSrc(name), i=0;
+  if(exact) v=[exact].concat(v);
+  (function tryNext(){
+    if(i>=v.length)return;
+    var im=new Image();
+    im.onload=function(){};
+    im.onerror=function(){i++;tryNext()};
+    im.src=v[i++];
+  })();
+}
+
+/* ---------- хранилище прогресса ---------- */
+var SKEY='twilight-quiz-stats-v1';
+var S={chars:{},overall:{rounds:0,best:0,lastRound:null}};
+function loadStats(){
+  try{
+    var raw=localStorage.getItem(SKEY);
+    if(raw){ var o=JSON.parse(raw);
+      if(o&&typeof o==='object'){
+        if(o.chars)S.chars=o.chars;
+        if(o.overall){S.overall.rounds=o.overall.rounds|0;S.overall.best=o.overall.best|0;S.overall.lastRound=o.overall.lastRound||null}
+      }
+    }
+  }catch(e){}
+}
+function saveStats(){ try{localStorage.setItem(SKEY,JSON.stringify(S))}catch(e){} }
+function rec(id){ if(!S.chars[id])S.chars[id]={seen:0,ok:0,wrong:0}; return S.chars[id] }
+function statusOf(id){
+  var r=S.chars[id];
+  if(!r||!r.seen)return 'new';
+  var acc=r.ok/r.seen;
+  if(r.seen>=3&&acc>=0.8)return 'mastered';
+  if(r.wrong>0&&acc<0.55)return 'bad';
+  return 'learning';
+}
+function totals(){
+  var ok=0,seen=0,mastered=0,learning=0,bad=0,fresh=0;
+  CHARS.forEach(function(c){
+    var st=statusOf(c.id), r=S.chars[c.id];
+    if(st==='mastered')mastered++; else if(st==='bad')bad++; else if(st==='learning')learning++; else fresh++;
+    if(r){ok+=r.ok;seen+=r.seen}
+  });
+  return {ok:ok,seen:seen,acc:seen?Math.round(ok/seen*100):0,mastered:mastered,learning:learning,bad:bad,fresh:fresh};
+}
+
+/* ---------- пулы и варианты ответа ---------- */
+var RACES=[
+  ['any','Любая раса'],['vampall','Все вампиры (любой вид)'],['Вампир','Вампир'],
+  ['Вампир (новорождённый)','Вампир-новорождённый'],['Вампир (кочевник)','Вампир-кочевник'],
+  ['Оборотень','Оборотень'],['Человек','Человек'],['Человек → Вампир','Человек → Вампир'],['Гибрид','Гибрид']
+];
+function matchRace(c,val){
+  if(val==='any')return true;
+  if(val==='vampall')return c.race.indexOf('Вампир')>-1;
+  return c.race===val;
+}
+function buildPool(){
+  var film=$('sel-film').value, race=$('sel-race').value, group=$('sel-group').value;
+  var pool=CHARS.filter(function(c){
+    if(!c.img)return false;
+    if(BROKEN[c.id])return false;
+    if(film!=='any'&&!has(c.films,+film))return false;
+    if(!matchRace(c,race))return false;
+    if(group!=='any'&&bucket(c)!==group)return false;
+    return true;
+  });
+  if($('tgl-wrong').checked)
+    pool=pool.filter(function(c){var r=S.chars[c.id];return r&&r.wrong>0});
+  return pool;
+}
+function tieredDummies(c,pool,diff){
+  /* кандидаты — из пула; если пул мал — добиваем из всех персонажей */
+  var base=pool.filter(function(x){return x.id!==c.id});
+  if(base.length<6) base=CHARS.filter(function(x){return x.id!==c.id&&x.img});
+  var tiers=[],rest=base.slice(),g=bucket(c),rg=raceGroup(c);
+  function take(pred){
+    var hit=rest.filter(pred);
+    if(hit.length){ tiers.push(shuffle(hit)); rest=rest.filter(function(x){return !has(hit,x)}) }
+  }
+  if(diff==='hard'){
+    take(function(x){return bucket(x)===g});
+    take(function(x){return raceGroup(x)===rg&&x.films.some(function(f){return has(c.films,f)})});
+    take(function(x){return x.films.some(function(f){return has(c.films,f)})});
+    take(function(x){return raceGroup(x)===rg});
+  }else if(diff==='mid'){
+    take(function(x){return x.race===c.race});
+    take(function(x){return raceGroup(x)===rg});
+    take(function(x){return x.films.some(function(f){return has(c.films,f)})});
+  }else{
+    tiers.push(shuffle(rest)); rest=[];
+  }
+  tiers.push(shuffle(rest));
+  var out=[];
+  for(var t=0;t<tiers.length&&out.length<3;t++)
+    for(var i=0;i<tiers[t].length&&out.length<3;i++) out.push(tiers[t][i]);
+  return out;
+}
+
+/* ---------- состояние раунда ---------- */
+var R=null;             /* текущий раунд */
+var BROKEN={};          /* id персонажей с ненайденными файлами кадров */
+var curScreen='menu';
+var DIFF='mid';
+
+function show(scr){
+  ['menu','quiz','result','stats'].forEach(function(s){
+    $('scr-'+s).classList.toggle('on',s===scr);
+  });
+  curScreen=scr;
+  window.scrollTo(0,0);
+}
+
+/* ---------- МЕНЮ ---------- */
+function initMenu(){
+  var fs=$('sel-film');
+  fs.innerHTML='<option value="any">Все фильмы</option>'+
+    Object.keys(FILMS).map(function(k){return '<option value="'+k+'">'+k+'. '+esc(FILMS[k])+'</option>'}).join('');
+  var rs=$('sel-race');
+  rs.innerHTML=RACES.map(function(r){return '<option value="'+esc(r[0])+'">'+esc(r[1])+'</option>'}).join('');
+  rebuildGroups();
+  ['sel-film','sel-race','sel-group','tgl-wrong'].forEach(function(id){
+    $(id).addEventListener('change',function(){ if(id!=='sel-group')rebuildGroups(); refreshPoolNote() });
+  });
+  refreshPoolNote();
+  renderMenuSummary();
+}
+function rebuildGroups(){
+  var film=$('sel-film').value, race=$('sel-race').value;
+  var cnt={};
+  CHARS.forEach(function(c){
+    if(!c.img)return;
+    if(film!=='any'&&!has(c.films,+film))return;
+    if(!matchRace(c,race))return;
+    var b=bucket(c); cnt[b]=(cnt[b]||0)+1;
+  });
+  var names=[]; BUCKETS.forEach(function(b){ if(cnt[b[1]]&&!has(names,b[1]))names.push(b[1]) });
+  if(cnt['Прочее'])names.push('Прочее');
+  var gs=$('sel-group'), prev=gs.value;
+  gs.innerHTML='<option value="any">Любая группа</option>'+
+    names.map(function(n){return '<option value="'+esc(n)+'">'+esc(n)+' ('+cnt[n]+')</option>'}).join('');
+  if(names.indexOf(prev)>-1)gs.value=prev;
+}
+function refreshPoolNote(){
+  var n=buildPool().length;
+  $('pool-count').textContent=n;
+  var wr=CHARS.filter(function(c){var r=S.chars[c.id];return r&&r.wrong>0}).length;
+  $('wrong-hint').textContent=wr?'(сейчас с ошибками: '+wr+')':'(ошибок пока нет)';
+  $('btn-start').disabled=n<2;
+  $('btn-start').style.opacity=n<2?'.45':'1';
+}
+function renderMenuSummary(){
+  var t=totals(), o=S.overall;
+  var lr=o.lastRound?'<div class="stat"><b>'+o.lastRound.ok+'/'+o.lastRound.t+'</b><span>последний раунд</span></div>':'';
+  $('menu-summary').innerHTML=
+    '<div class="stat"><b>'+t.mastered+' <i style="font-size:12px;color:var(--dim)">/ '+CHARS.length+'</i></b><span>персонажей освоено</span></div>'+
+    '<div class="stat"><b>'+(t.seen?t.acc+'%':'—')+'</b><span>точность всего</span></div>'+
+    '<div class="stat"><b>'+(o.best||'—')+'</b><span>лучшая серия 🔥</span></div>'+
+    lr;
+}
+
+/* ---------- РАУНД ---------- */
+function startRound(cfg){
+  var pool=cfg.pool&&cfg.pool.length?cfg.pool:buildPool();
+  if(pool.length<2){ alert('В выбранном пуле меньше двух персонажей — расширьте фильтры.'); return }
+  var want=+cfg.count||0;
+  var order=shuffle(pool);
+  if(want>0&&want<order.length)order=order.slice(0,want);
+  R={order:order,idx:0,ok:0,bad:0,streak:0,best:0,wrongList:[],t0:Date.now(),
+     diff:cfg.diff||DIFF,count:cfg.count,film:cfg.film,race:cfg.race,group:cfg.group,onlyWrong:cfg.onlyWrong};
+  show('quiz');
+  renderQuestion();
+}
+function renderQuestion(){
+  if(!R)return;
+  if(R.idx>=R.order.length){ finish(); return }
+  var c=R.order[R.idx];
+  if(BROKEN[c.id]){ replaceCurrent(); return }
+  $('q-idx').textContent=R.idx+1;
+  $('q-total').textContent=R.order.length;
+  $('q-prog').style.width=Math.round(R.idx/R.order.length*100)+'%';
+  $('q-ok').textContent=R.ok; $('q-bad').textContent=R.bad; $('q-fire').textContent='🔥 '+R.streak;
+  $('q-verdict').textContent=''; $('q-verdict').className='verdict';
+  $('q-dossier').classList.remove('on'); $('q-dossier').innerHTML='';
+  $('btn-next').classList.remove('on');
+  var photo=$('q-photo');
+  photo.classList.remove('answered');
+  photo.style.setProperty('--rc',raceColor(c.race));
+  photo.innerHTML=imgTag(c.img,'','Кадр из киносаги «Сумерки»',c.id)+
+    '<span class="racebadge">'+esc(c.race)+'</span>';
+  var dummies=tieredDummies(c,R.order.length>3?byPoolOfRound():CHARS.filter(function(x){return x.id!==c.id}),R.diff);
+  var opts=shuffle([c].concat(dummies));
+  R.correctIdx=opts.indexOf(c);
+  $('q-opts').innerHTML=opts.map(function(x,i){
+    return '<button class="opt" data-i="'+i+'"><span class="k">'+(i+1)+'</span><span>'+esc(dname(x))+'</span></button>';
+  }).join('');
+  Array.prototype.forEach.call($('q-opts').children,function(b){
+    b.addEventListener('click',function(){ answer(+b.getAttribute('data-i')) });
+  });
+  R.answered=false;
+  /* предзагруз следующего кадра */
+  if(R.idx+1<R.order.length) preload(R.order[R.idx+1].img);
+}
+function byPoolOfRound(){
+  /* пул текущего раунда для подбора вариантов (учитывает фильтры раунда) */
+  if(R._pool)return R._pool;
+  var f=$('sel-film').value,r=$('sel-race').value,g=$('sel-group').value;
+  R._pool=CHARS.filter(function(c){
+    if(!c.img)return false;
+    if(R.film!=='any'&&R.film!=null&&!has(c.films,+R.film))return false;
+    if(R.race&&R.race!=='any'&&!matchRace(c,R.race))return false;
+    if(R.group&&R.group!=='any'&&bucket(c)!==R.group)return false;
+    return true;
+  });
+  return R._pool;
+}
+function answer(i){
+  if(!R||R.answered)return;
+  R.answered=true;
+  var c=R.order[R.idx], right=i===R.correctIdx;
+  var r=rec(c.id); r.seen++;
+  var btns=$('q-opts').children;
+  for(var k=0;k<btns.length;k++){
+    btns[k].disabled=true;
+    if(k===R.correctIdx)btns[k].classList.add('correct');
+    else if(k===i)btns[k].classList.add('wrong');
+    else btns[k].classList.add('miss');
+  }
+  $('q-photo').classList.add('answered');
+  var v=$('q-verdict');
+  if(right){
+    R.ok++; R.streak++; if(R.streak>R.best)R.best=R.streak;
+    r.ok++;
+    v.textContent=R.streak>=3?'Верно! Серия: '+R.streak+' 🔥':'Верно! ✓';
+    v.className='verdict ok';
+  }else{
+    R.bad++; R.streak=0; r.wrong++;
+    R.wrongList.push(c);
+    v.textContent='Неверно. Это '+dname(c);
+    v.className='verdict bad';
+  }
+  if(R.best>S.overall.best){S.overall.best=R.best}
+  saveStats();
+  $('q-ok').textContent=R.ok; $('q-bad').textContent=R.bad; $('q-fire').textContent='🔥 '+R.streak;
+  $('q-dossier').innerHTML=dossierHtml(c);
+  $('q-dossier').classList.add('on');
+  var nb=$('btn-next');
+  nb.textContent=(R.idx+1>=R.order.length)?'Показать результаты 🏁':'Дальше →';
+  nb.classList.add('on');
+  try{nb.focus({preventScroll:true})}catch(e){nb.focus()}
+}
+function dossierHtml(c){
+  return '<div class="dn">'+esc(dname(c))+
+    '<span class="racepill" style="--rc:'+raceColor(c.race)+'">'+esc(c.race)+'</span></div>'+
+    '<div class="den">'+esc(c.en)+'</div>'+
+    '<div class="row">🎭 Актёр: <b>'+esc(c.actor)+'</b></div>'+
+    '<div class="row">👥 ' +esc(c.clan||'—')+'</div>'+
+    (c.age&&c.age!=='—'?'<div class="row">🎂 Возраст: <b>'+esc(c.age)+'</b>'+(c.birth?' · '+esc(c.birth)+' <span style="color:var(--dim)">('+esc(c.conf)+')</span>':'')+'</div>':'')+
+    '<div class="row">🎬 Фильмы: '+filmsHtml(c.films)+'</div>'+
+    (c.note?'<div class="dnote">'+esc(c.note)+'</div>':'');
+}
+function next(){
+  if(!R||!R.answered)return;
+  R.idx++;
+  renderQuestion();
+}
+/* кадр персонажа не найден ни по одному варианту — заменяем вопрос */
+window.__qImgDead=function(id){
+  BROKEN[id]=1;
+  if(R&&R.order[R.idx]&&R.order[R.idx].id===id&&!R.answered) replaceCurrent();
+};
+function replaceCurrent(){
+  var used={}; R.order.forEach(function(c){ used[c.id]=1 }); /* уже заданные (до и после текущего) не повторяем */
+  var cand=byPoolOfRound().filter(function(c){ return !used[c.id]&&!BROKEN[c.id] });
+  if(cand.length){ R.order[R.idx]=cand[Math.floor(Math.random()*cand.length)] }
+  else{ R.order.splice(R.idx,1) }
+  renderQuestion();
+}
+function finish(){
+  var t=R.order.length||1;
+  var pct=Math.round(R.ok/t*100);
+  var secs=Math.round((Date.now()-R.t0)/1000);
+  S.overall.rounds++;
+  S.overall.lastRound={ok:R.ok,t:R.order.length,d:new Date().toISOString().slice(0,10)};
+  saveStats();
+  var pe=$('res-pct');
+  pe.textContent=pct+'%';
+  pe.className='res-pct '+(pct>=85?'good':pct>=55?'mid':'low');
+  var msg=pct===100?'Безупречно! Вольтури гордились бы вашей памятью. 🏆':
+          pct>=85?'Великолепно! Вы почти знаете всю сагу наизусть.':
+          pct>=70?'Хороший результат — ещё немного практики, и будет идеально.':
+          pct>=55?'Неплохо, но ошибки стоит отработать.':
+                  'Похоже, пора перечитать досье персонажей. 📖';
+  $('res-msg').textContent=msg;
+  $('res-stats').innerHTML=
+    '<div class="stat"><b style="color:var(--ok)">'+R.ok+'</b><span>верно</span></div>'+
+    '<div class="stat"><b style="color:var(--bad)">'+R.bad+'</b><span>ошибок</span></div>'+
+    '<div class="stat"><b>🔥 '+R.best+'</b><span>лучшая серия раунда</span></div>'+
+    '<div class="stat"><b>'+Math.floor(secs/60)+':'+pad2(secs%60)+'</b><span>время</span></div>';
+  var wb=$('res-wrong-box');
+  if(R.wrongList.length){
+    wb.innerHTML='<h3>Вы ошиблись в этих персонажах — запомните их:</h3><div class="wgrid">'+
+      R.wrongList.map(function(c){
+        return '<div class="wcard"><div class="wp">'+imgTag(c.img,'','')+'</div>'+
+          '<div class="wn">'+esc(dname(c))+'</div><div class="wa">'+esc(c.actor)+'</div></div>';
+      }).join('')+'</div>';
+  }else wb.innerHTML='';
+  var rb=$('btn-retry-wrong');
+  if(R.wrongList.length){
+    rb.style.display=''; rb.textContent='🎯 Отработать ошибки ('+R.wrongList.length+')';
+    rb.onclick=function(){ startRound({pool:R.wrongList.slice(),count:0,diff:R.diff,film:R.film,race:R.race,group:R.group}) };
+  }else rb.style.display='none';
+  show('result');
+}
+
+/* ---------- СТАТИСТИКА ---------- */
+var stFilter='all';
+function renderStats(){
+  var t=totals();
+  $('st-summary').innerHTML=
+    '<div class="stat"><b>'+t.mastered+'</b><span>освоено</span></div>'+
+    '<div class="stat"><b>'+t.learning+'</b><span>в процессе</span></div>'+
+    '<div class="stat"><b>'+t.bad+'</b><span>путаются</span></div>'+
+    '<div class="stat"><b>'+t.fresh+'</b><span>не начато</span></div>'+
+    '<div class="stat"><b>'+(t.seen?t.acc+'%':'—')+'</b><span>точность</span></div>';
+  var rows=CHARS.filter(function(c){
+    var r=S.chars[c.id], st=statusOf(c.id);
+    if(stFilter==='all')return true;
+    if(stFilter==='bad')return !!(r&&r.wrong>0&&st!=='mastered');
+    if(stFilter==='new')return st==='new';
+    if(stFilter==='mastered')return st==='mastered';
+    if(stFilter==='learning')return st==='learning'||st==='bad';
+    return true;
+  });
+  var order={bad:0,learning:1,new:2,mastered:3};
+  rows.sort(function(a,b){
+    var d=order[statusOf(a.id)]-order[statusOf(b.id)];
+    return d!==0?d:String(a.ru).localeCompare(String(b.ru),'ru');
+  });
+  var labels={new:['new','не начат'],learning:['learning','учится'],bad:['bad','путается'],mastered:['mastered','освоен']};
+  $('st-list').innerHTML=rows.length?rows.map(function(c){
+    var r=S.chars[c.id]||{seen:0,ok:0,wrong:0};
+    var acc=r.seen?Math.round(r.ok/r.seen*100):0;
+    var st=statusOf(c.id), L=labels[st];
+    var col=st==='mastered'?'var(--ok)':st==='bad'?'var(--bad)':st==='learning'?'var(--gold)':'var(--line2)';
+    return '<div class="strow">'+
+      '<span class="sp">'+(c.img?imgTag(c.img,'',''):'')+'</span>'+
+      '<span class="sn"><b>'+esc(dname(c))+'</b><span>'+esc(c.race)+' · '+esc(c.actor.split('→')[0].trim())+'</span></span>'+
+      '<span class="sb"><span class="mbar"><i style="width:'+acc+'%;background:'+col+'"></i></span></span>'+
+      '<span class="sc">'+(r.seen?'<b>'+acc+'%</b> · '+r.ok+'✓/'+r.wrong+'✗':'<span style="color:var(--dim)">—</span>')+
+      ' <span class="mtag '+L[0]+'">'+L[1]+'</span></span>'+
+    '</div>';
+  }).join(''):'<p style="color:var(--dim);text-align:center;padding:20px">Ничего не найдено</p>';
+}
+
+/* ---------- события ---------- */
+function bind(){
+  Array.prototype.forEach.call($('diff-row').children,function(ch){
+    ch.addEventListener('click',function(){
+      Array.prototype.forEach.call($('diff-row').children,function(x){x.classList.remove('on')});
+      ch.classList.add('on'); DIFF=ch.getAttribute('data-d');
+    });
+  });
+  $('btn-start').addEventListener('click',function(){
+    startRound({count:+$('sel-count').value,diff:DIFF,
+      film:$('sel-film').value,race:$('sel-race').value,group:$('sel-group').value,
+      onlyWrong:$('tgl-wrong').checked});
+  });
+  $('btn-next').addEventListener('click',next);
+  $('btn-exit').addEventListener('click',function(){ show('menu'); renderMenuSummary(); refreshPoolNote() });
+  $('btn-tomenu').addEventListener('click',function(){ show('menu'); renderMenuSummary(); refreshPoolNote() });
+  $('btn-again').addEventListener('click',function(){
+    startRound({count:R?R.count:20,diff:R?R.diff:DIFF,film:R?R.film:'any',race:R?R.race:'any',group:R?R.group:'any'});
+  });
+  $('btn-stats').addEventListener('click',function(){ renderStats(); show('stats') });
+  $('btn-st-back').addEventListener('click',function(){ show('menu'); renderMenuSummary(); refreshPoolNote() });
+  $('btn-catalog').addEventListener('click',function(){ location.href='index.html' });
+  $('btn-reset').addEventListener('click',function(){
+    if(confirm('Сбросить весь прогресс обучения? Действие необратимо.')){
+      S={chars:{},overall:{rounds:0,best:0,lastRound:null}};
+      saveStats(); renderStats();
+    }
+  });
+  Array.prototype.forEach.call($('st-filters').children,function(ch){
+    ch.addEventListener('click',function(){
+      Array.prototype.forEach.call($('st-filters').children,function(x){x.classList.remove('on')});
+      ch.classList.add('on'); stFilter=ch.getAttribute('data-f'); renderStats();
+    });
+  });
+  document.addEventListener('keydown',function(e){
+    var tag=(e.target&&e.target.tagName||'').toLowerCase();
+    if(tag==='button'||tag==='select'||tag==='input')return; /* не дублируем клик/фокус */
+    if(curScreen==='quiz'&&R){
+      if(!R.answered&&['1','2','3','4'].indexOf(e.key)>-1){
+        var b=$('q-opts').children[+e.key-1]; if(b&&!b.disabled)b.click();
+      }else if(R.answered&&(e.key==='Enter'||e.key===' ')){ e.preventDefault(); next() }
+      else if(e.key==='Escape'){ show('menu'); renderMenuSummary(); refreshPoolNote() }
+    }else if(curScreen==='menu'&&e.key==='Enter'){ $('btn-start').click() }
+    else if(curScreen==='result'&&e.key==='Enter'){ $('btn-again').click() }
+  });
+}
+
+/* ---------- старт ---------- */
+loadStats();
+imgLoadMap();
+initMenu();
+bind();
+})();
+</script>
+</body>
+</html>
