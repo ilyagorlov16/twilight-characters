@@ -148,7 +148,7 @@ footer{padding:30px 0 44px;border-top:1px solid var(--line);color:var(--dim);fon
     <h1>Все персонажи пяти фильмов:<br><span class="g">фото, возраст, раса, клан и актёр</span></h1>
     <p class="lead">Каталог построен по сведённому актёрскому составу саги (Wikipedia: <i>List of The Twilight Saga cast members</i>,
       сверено с IMDb и Twilight Saga Wiki). Каждый персонаж получил карточку с реальным кадром из фильма,
-      возрастом, годом рождения, расой, кланом и актёром. Изображения лежат рядом, в папке <b>images/</b> — ничего не генерируется.</p>
+      возрастом, годом рождения, расой, кланом и актёром.</p>
     <div class="filmstrip" id="filmstrip"></div>
     <div class="stats" id="stats"></div>
   </div>
@@ -231,8 +231,6 @@ document.getElementById('filmstrip').innerHTML=Object.keys(FILMS).map(function(k
 }).join("");
 document.getElementById('stats').innerHTML=
   '<div class="stat"><b>'+ST.total+'</b><span>персонажей</span></div>'+
-  '<div class="stat"><b>'+ST.with_photo+'</b><span>с кадрами</span></div>'+
-  '<div class="stat"><b>'+(ST.total-ST.with_photo)+'</b><span>эпизоды (без кадра)</span></div>'+
   '<div class="stat"><b>5</b><span>фильмов</span></div>';
 document.getElementById('totalAll').textContent=ST.total;
 
