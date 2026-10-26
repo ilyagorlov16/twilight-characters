@@ -274,26 +274,42 @@ function paintFilm(){
 
 var SIL='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.7 0 4.8-2.2 4.8-4.9S14.7 2.2 12 2.2 7.2 4.4 7.2 7.1 9.3 12 12 12zm0 2.3c-3.9 0-8 2-8 5v2.5h16v-2.5c0-3-4.1-5-8-5z"/></svg>';
 
-/* --- Надёжная загрузка картинок: перебор расширений и регистра имени ---
-   GitHub Pages чувствителен к регистру, а файлы могли быть сохранены
-   в .png/.jpeg/.webp — поэтому при 404 пробуем следующие варианты. */
-var IMG_EXTS=['.jpg','.jpeg','.png','.webp','.gif'];
+/* --- Надёжная загрузка картинок -------------------------------------
+   1) На GitHub Pages страница сама запрашивает список файлов папки
+      images/ через GitHub API и подставляет ТОЧНЫЕ имена (решает любые
+      проблемы регистра и расширений: .JPG, .png, Santiago.jpeg и т.п.).
+   2) Если API недоступен (локальный файл, приватный репозиторий, лимит) —
+      перебор вариантов через onerror.
+   3) Если ничего не найдено — аккуратная заглушка. */
+var IMG_EXTS=['.jpg','.jpeg','.png','.webp','.gif','.JPG','.JPEG','.PNG','.WEBP'];
+var IMG_MAP=null; /* { "santiago": "Santiago.PNG", ... } — точные имена файлов */
+
 function imgVariants(name){
-  var out=[],i,j;
-  var names=[name];
-  if(name!==name.toLowerCase()) names.push(name.toLowerCase());
-  else names.push(name.charAt(0).toUpperCase()+name.slice(1));
-  for(i=0;i<names.length;i++)
+  var out=[],i,j,seen={};
+  var names=[name,name.toLowerCase(),
+             name.charAt(0).toUpperCase()+name.slice(1),
+             name.toUpperCase()];
+  for(i=0;i<names.length;i++){
+    if(seen[names[i]]) continue;
+    seen[names[i]]=1;
     for(j=0;j<IMG_EXTS.length;j++)
       out.push('images/'+names[i]+IMG_EXTS[j]);
+  }
   return out;
 }
-function imgFallback(el){
-  var v=JSON.parse(el.getAttribute('data-v')||'[]');
-  var i=parseInt(el.getAttribute('data-i')||'-1',10)+1;
-  el.setAttribute('data-i',String(i));
-  if(i<v.length){ el.src=v[i]; return; }
-  /* все варианты исчерпаны — показываем заглушку */
+function imgExactSrc(name){
+  if(IMG_MAP && Object.prototype.hasOwnProperty.call(IMG_MAP,String(name).toLowerCase()))
+    return 'images/'+IMG_MAP[String(name).toLowerCase()];
+  return null;
+}
+function imgKnownMissing(name){
+  return !!(IMG_MAP && !imgExactSrc(name));
+}
+function imgPlaceholderHtml(isRow){
+  return isRow?'<span class="tph none">—</span>'
+              :'<div class="noimg">'+SIL+'<span>кадр не найден</span></div>';
+}
+function imgReplaceWithPlaceholder(el){
   var ph=document.createElement('span');
   if(el.classList.contains('tph')){
     ph.className='tph none'; ph.textContent='—';
@@ -302,18 +318,56 @@ function imgFallback(el){
   }
   if(el.parentNode) el.parentNode.replaceChild(ph,el);
 }
+function imgFallback(el){
+  var v=JSON.parse(el.getAttribute('data-v')||'[]');
+  var i=parseInt(el.getAttribute('data-i')||'-1',10)+1;
+  el.setAttribute('data-i',String(i));
+  if(i<v.length){ el.src=v[i]; return; }
+  imgReplaceWithPlaceholder(el); /* все варианты исчерпаны */
+}
 function imgTag(name,cls,alt){
   var v=imgVariants(name);
-  return '<img'+(cls?' class="'+cls+'"':'')+' loading="lazy" src="'+v[0]+
-    '" data-v=\''+JSON.stringify(v).replace(/'/g,"&#39;")+'\' data-i="0"'+
+  var exact=imgExactSrc(name);
+  var src=exact||v[0];
+  if(exact) v=[exact].concat(v); /* точное имя — первым вариантом */
+  return '<img'+(cls?' class="'+cls+'"':'')+' loading="lazy" src="'+src+
+    '" data-name="'+name+'" data-v=\''+JSON.stringify(v).replace(/'/g,"&#39;")+'\' data-i="0"'+
+    ' onload="this.setAttribute(\'data-ok\',\'1\')"'+
     ' onerror="imgFallback(this)" alt="'+alt+'">';
+}
+/* После получения списка файлов: перерисовываем список — все <img> получают
+   точные src, а преждевременные заглушки исчезают. */
+function imgApplyMap(){
+  render();
+}
+function imgLoadMap(){
+  var m=location.hostname.match(/^(.+)\.github\.io$/i);
+  if(!m) return; /* не GitHub Pages — работаем через перебор вариантов */
+  var parts=location.pathname.split('/').filter(Boolean);
+  if(!parts.length) return;
+  var url='https://api.github.com/repos/'+encodeURIComponent(m[1])+'/'+
+          encodeURIComponent(parts[0])+'/contents/images';
+  fetch(url,{headers:{'Accept':'application/vnd.github+json'}})
+    .then(function(r){ return r.ok?r.json():null; })
+    .then(function(list){
+      if(!list||!list.length) return;
+      IMG_MAP={};
+      list.forEach(function(f){
+        if(f.type!=='file') return;
+        var b=f.name, i=b.lastIndexOf('.');
+        var key=(i>0?b.slice(0,i):b).toLowerCase();
+        IMG_MAP[key]=f.name;
+      });
+      imgApplyMap();
+    })
+    .catch(function(){}); /* приватный репо/лимит — остаётся fallback-цепочка */
 }
 
 function filmChipsHtml(f){return '<span class="films">'+f.map(function(k){return '<span class="fchip">'+k+'</span>'}).join("")+'</span>'}
 
 function cardHtml(c){
   var ph;
-  if(c.img){
+  if(c.img && !imgKnownMissing(c.img)){
     ph=imgTag(c.img,'',esc(c.ru))+filmChipsHtml(c.films);
   }else{
     ph='<div class="noimg">'+SIL+'<span>кадр не найден</span></div>'+filmChipsHtml(c.films);
@@ -333,7 +387,7 @@ function cardHtml(c){
     '</div></article>';
 }
 function rowHtml(c){
-  var ph=c.img?imgTag(c.img,'tph',''):'<span class="tph none">—</span>';
+  var ph=(c.img && !imgKnownMissing(c.img))?imgTag(c.img,'tph',''):'<span class="tph none">—</span>';
   return '<tr>'+
     '<td>'+ph+'</td>'+
     '<td><b>'+esc(c.ru)+'</b><br><span style="color:var(--dim);font-size:11.5px">'+esc(c.en)+'</span></td>'+
@@ -363,7 +417,7 @@ function render(){
   document.getElementById('shown').textContent=list.length;
   document.getElementById('empty').style.display=list.length?"none":"block";
 }
-paintRace();paintFilm();render();
+paintRace();paintFilm();render();imgLoadMap();
 
 /* фактчек */
 (function(){
